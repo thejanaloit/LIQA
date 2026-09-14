@@ -69,3 +69,12 @@ powershell -File scripts\bootstrap-worker-vm.ps1
 
 `packaging/out/LIQA-FINAL-PACKAGE-*.zip` — see `docs/FINAL-PACKAGE.md`
 
+
+## Remaining cleared (2026-09-14)
+
+1. Self-check: Control+Worker OK; agency 279 QA-trained; vault present (gitignored).
+2/3. 2QA humans: ThejanaD (Gate), MethmiB (Sign-off) — see docs/OPS-2QA-ROSTER.md
+4. Team move: owner confirmed done.
+5. Vault: secrets/tmp-creds.json on this device (not in git).
+6. GitHub share: owner confirmed done.
+7. CI: pytest same-level + industry in workflow; run locally green.
