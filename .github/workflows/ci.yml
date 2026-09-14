@@ -22,6 +22,17 @@ jobs:
       - name: no secrets
         shell: pwsh
         run: |
-          $bad = Select-String -Path (Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch '\\.git\\|node_modules|vendor\\oss|packaging\\out' } | ForEach-Object FullName) -Pattern 'CURSOR_API_KEY=\S+|crsr_[a-z0-9]{20,}|The@#|qupzik-bojdo' -ErrorAction SilentlyContinue
-          if ($bad) { $bad | ForEach-Object { $_.Path + ':' + $_.LineNumber }; exit 1 }
+          # Do not embed real password literals in this workflow — they would self-match.
+          $rx = 'CURSOR_API_KEY=\S+|crsr_[a-z0-9]{20,}|"maker_password"\s*:\s*"(?!REPLACE_ME)[^"]+"|"checker_password"\s*:\s*"(?!REPLACE_ME)[^"]+"'
+          $files = Get-ChildItem -Recurse -File |
+            Where-Object { $_.FullName -notmatch '\\.git\\|node_modules|vendor\\oss|packaging\\out|__pycache__|\.pytest_cache' }
+          $hits = @()
+          foreach ($f in $files) {
+            $m = Select-String -Path $f.FullName -Pattern $rx -ErrorAction SilentlyContinue
+            if ($m) { $hits += $m }
+          }
+          if ($hits.Count -gt 0) {
+            $hits | ForEach-Object { "$($_.Path):$($_.LineNumber)" }
+            exit 1
+          }
           Write-Host "secret scan clean"
