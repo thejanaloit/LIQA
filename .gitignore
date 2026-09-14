@@ -2,7 +2,10 @@
 .env.local
 .env.*.local
 *.pem
-secrets/
+secrets/**
+!secrets/
+!secrets/*.example.json
+!secrets/tmp-creds.example.json
 captures/
 jobs/
 trajectories/
@@ -20,7 +23,6 @@ apps/worker/jobs/
 apps/worker/gates/
 apps/worker/session.json
 apps/control/data/
-# Ignore generic xlsx dumps, keep gold Book1 samples
 *.xlsx
 !artifacts/book1-samples/**/*.xlsx
 !docs/**
@@ -29,7 +31,6 @@ node_modules/
 Thumbs.db
 *.env
 !.env.example
-# Built zips — regenerate with scripts/pack-final-package.ps1
 packaging/out/
 workspace/default-run/agents/mesh/assignments.jsonl
 workspace/**/captures/

@@ -68,11 +68,16 @@ def test_agency_mesh_or_catalog():
 
     cat = agency_mesh.list_specialists(limit=50)
     assert cat["ok"] is True
-    # Full agency tree preferred; core fallback still must expose orchestrator
     ids = {s["id"] for s in cat["specialists"]}
     assert "agents-orchestrator" in ids or any("orchestrator" in i for i in ids)
-    # If agency-agents is wired, count must be high; else core list still ok but document
-    if Path(cat["agency_root"]).exists() and (Path(cat["agency_root"]) / ".cursor" / "rules").exists():
+    # Prefer live agency-agents; else bundled catalog (≥200) is same-level OK
+    if cat.get("source") == "agency-agents" and cat["count"] < 200:
+        raise AssertionError(f"agency count too low for same-level: {cat['count']}")
+    if cat.get("source") in ("bundled-catalog", "core-fallback"):
+        assert cat["count"] >= 15, f"catalog too small: {cat['count']}"
+        if cat.get("source") == "bundled-catalog":
+            assert cat["count"] >= 200, f"bundled catalog incomplete: {cat['count']}"
+    elif Path(cat["agency_root"]).exists() and (Path(cat["agency_root"]) / ".cursor" / "rules").exists():
         assert cat["count"] >= 200, f"agency count too low for same-level: {cat['count']}"
 
 

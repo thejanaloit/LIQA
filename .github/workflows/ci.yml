@@ -16,13 +16,12 @@ jobs:
       - name: pytest same-level + industry
         env:
           LIQA_HOME: ${{ github.workspace }}
-          LIQA_AGENCY_HOME: ${{ github.workspace }}
         run: python -m pytest tests/test_same_level_contract.py tests/test_industry_ops_model.py -q
       - name: unittest discover
         run: python -m unittest discover -s tests -v
       - name: no secrets
         shell: pwsh
         run: |
-          $bad = Select-String -Path (Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch '\\.git\\|node_modules|vendor\\oss|packaging\\out' } | ForEach-Object FullName) -Pattern 'CURSOR_API_KEY=\S+|crsr_[a-z0-9]{20,}' -ErrorAction SilentlyContinue
-          if ($bad) { $bad | ForEach-Object { $_.Path + ':' + $_.LineNumber + ':' + $_.Line }; exit 1 }
+          $bad = Select-String -Path (Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notmatch '\\.git\\|node_modules|vendor\\oss|packaging\\out' } | ForEach-Object FullName) -Pattern 'CURSOR_API_KEY=\S+|crsr_[a-z0-9]{20,}|The@#|qupzik-bojdo' -ErrorAction SilentlyContinue
+          if ($bad) { $bad | ForEach-Object { $_.Path + ':' + $_.LineNumber }; exit 1 }
           Write-Host "secret scan clean"

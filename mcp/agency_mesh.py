@@ -40,8 +40,10 @@ def list_specialists(limit: int = 300) -> dict[str, Any]:
     root = _agents_dir()
     all_items: list[dict[str, Any]] = []
     source = "agency-agents"
-    if root.is_dir() and any(root.glob("*.mdc")):
-        for p in sorted(root.glob("*.mdc")):
+    mdc_files = list(root.glob("*.mdc")) if root.is_dir() else []
+    # Real agency-agents tree is large; tiny .cursor/rules (e.g. LIQA-only) is not enough
+    if len(mdc_files) >= 50:
+        for p in sorted(mdc_files):
             name = p.stem
             desc = ""
             try:
@@ -59,7 +61,6 @@ def list_specialists(limit: int = 300) -> dict[str, Any]:
                 desc = ""
             all_items.append({"id": name, "path": str(p), "description": desc})
     else:
-        # Bundled catalog for Worker VMs without agency-agents checkout
         from paths import REPO_ROOT
 
         catalog = REPO_ROOT / "packaging" / "industry" / "agency-catalog.json"
