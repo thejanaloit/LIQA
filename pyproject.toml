@@ -1,0 +1,21 @@
+[project]
+name = "liqa"
+version = "0.1.0"
+description = "Live Intelligent QA — headed Worker + Control. Human-like OS and browser control."
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["apps/worker", "apps/control"]

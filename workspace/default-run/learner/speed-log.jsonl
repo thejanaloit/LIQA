@@ -1,0 +1,1 @@
+{"ts": "2026-09-14T05:27:54.245595+00:00", "task_key": "PF-55248", "notes": "seed", "what_worked": "CDP+Playwright+minimize Excel", "what_slowed": "pyautogui SPA focus loss", "seconds_saved_estimate": 1800, "techniques": []}

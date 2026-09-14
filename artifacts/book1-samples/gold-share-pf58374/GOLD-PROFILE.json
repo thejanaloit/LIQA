@@ -1,0 +1,56 @@
+{
+  "stamp": "2026-09-12-share-gold",
+  "name": "PF-58374-Book1-SHARE",
+  "source": "C:\\Users\\ThejanaD\\Downloads\\PF-58374-Book1-SHARE.xlsx",
+  "relative_path": "artifacts/book1-samples/gold-share-pf58374/PF-58374-Book1-SHARE.xlsx",
+  "law": "Every task Book1 must match this SHARE quality every time (screenshots + full English all fields).",
+  "contract_version": "2026-09-12-book1-gold-share-parity-v117",
+  "sheet": "Sheet1",
+  "columns": [
+    "Area",
+    "Issue",
+    "Screenshot",
+    "What is testing",
+    "Why that failed your prediction",
+    "2nd QA confirmation",
+    "Simple explanation (plain English)"
+  ],
+  "observed": {
+    "data_rows": 112,
+    "embedded_images": 112,
+    "image_coverage": 1.0,
+    "min_chars_observed": {
+      "Area": 283,
+      "Issue": 626,
+      "What is testing": 260,
+      "Why that failed your prediction": 283,
+      "2nd QA confirmation": 321,
+      "Simple explanation (plain English)": 360
+    },
+    "avg_chars_observed": {
+      "Area": 286,
+      "Issue": 686,
+      "What is testing": 320,
+      "Why that failed your prediction": 332,
+      "2nd QA confirmation": 330,
+      "Simple explanation (plain English)": 443
+    }
+  },
+  "enforced_min_chars": {
+    "Area": 250,
+    "Issue": 500,
+    "What is testing": 240,
+    "Why that failed your prediction": 250,
+    "2nd QA confirmation": 280,
+    "Simple explanation (plain English)": 320
+  },
+  "enforced": {
+    "min_data_rows": 110,
+    "image_coverage": 1.0,
+    "image_shortfall_max": 0,
+    "text_field_gap_total_max": 0,
+    "sheet_only": ["Sheet1"],
+    "simple_must_contain": ["In simple words:"],
+    "what_must_hint": ["This test verifies", "Under "]
+  }
+}

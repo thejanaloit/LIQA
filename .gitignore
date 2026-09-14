@@ -1,0 +1,36 @@
+.env
+.env.local
+.env.*.local
+*.pem
+secrets/
+captures/
+jobs/
+trajectories/
+knowledgeBase/
+reports/*.csv
+reports/*.zip
+reports/*.txt
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+vendor/oss/
+apps/worker/jobs/
+apps/worker/gates/
+apps/worker/session.json
+apps/control/data/
+# Ignore generic xlsx dumps, keep gold Book1 samples
+*.xlsx
+!artifacts/book1-samples/**/*.xlsx
+!docs/**
+node_modules/
+.DS_Store
+Thumbs.db
+*.env
+!.env.example
+# Built zips — regenerate with scripts/pack-final-package.ps1
+packaging/out/
+workspace/default-run/agents/mesh/assignments.jsonl
+workspace/**/captures/
+*.log

@@ -1,0 +1,84 @@
+{
+  "stamp": "20260908-1013",
+  "folder": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013",
+  "format": "Book1 Area|Issue|Screenshot|What is testing|Why that failed your prediction|2nd QA|Simple explanation",
+  "files": [
+    {
+      "story": "PF-58374",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58374-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "PASS"
+    },
+    {
+      "story": "PF-58375",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58375-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "PASS"
+    },
+    {
+      "story": "PF-58376",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58376-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 117,
+      "images": 111,
+      "verdict": "REAL_BUG"
+    },
+    {
+      "story": "PF-58377",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58377-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "PASS"
+    },
+    {
+      "story": "PF-58378",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58378-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "PASS"
+    },
+    {
+      "story": "PF-58379",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58379-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "BLOCKED"
+    },
+    {
+      "story": "PF-58380",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58380-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "PASS"
+    },
+    {
+      "story": "PF-58381",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58381-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "N/A"
+    },
+    {
+      "story": "PF-58382",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58382-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "N/A"
+    },
+    {
+      "story": "PF-58383",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58383-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "PASS"
+    },
+    {
+      "story": "PF-58384",
+      "file": "E:\\ManualQA-FINAL-EXCEL-REDO\\QA-TEAM-BOOK1-EXACT-20260908-1013\\PF-58384-Book1-LATEST-20260908-1013.xlsx",
+      "rows": 116,
+      "images": 110,
+      "verdict": "BLOCKED"
+    }
+  ]
+}

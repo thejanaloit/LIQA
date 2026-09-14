@@ -1,0 +1,6 @@
+# LIQA Worker runtime
+mss>=9.0.0
+Pillow>=10.0.0
+pyautogui>=0.9.54
+# Optional OCR for click_text:
+# pytesseract>=0.3.10

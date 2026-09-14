@@ -1,0 +1,2 @@
+# LIQA Control — stdlib HTTP; optional extras
+# (no hard deps; authz/crypto are local modules)

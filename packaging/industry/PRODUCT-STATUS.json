@@ -1,0 +1,12 @@
+{
+  "product": "LIQA",
+  "version": "2026-09-14-qa-trained-v1",
+  "status": "FINAL_PACKAGE",
+  "model": "2QA + LIQA execution + 279 QA-trained agency specialists",
+  "agency_specialists": 279,
+  "agency_qa_trained": 279,
+  "mcp_tools_min": 70,
+  "training": "packaging/industry/agency-qa-trained",
+  "final_doc": "docs/FINAL-PACKAGE.md",
+  "builtAt": "2026-09-14T05:59:08.146478+00:00"
+}

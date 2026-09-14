@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>LIQA Control — 2QA Ops</title>
+<style>
+body{font-family:Segoe UI,system-ui,sans-serif;margin:24px;background:#111;color:#eee}
+h1{font-size:22px} h2{font-size:16px;margin:0 0 8px;color:#bbb}
+a{color:#8ab4ff}
+.card{background:#1c1c1c;padding:16px;margin:12px 0;border:1px solid #333}
+.ok{color:#6f6}.bad{color:#f66}.warn{color:#fc6}
+button{padding:8px 12px;margin:4px 8px 4px 0;cursor:pointer}
+input,textarea{width:100%;padding:8px;margin:6px 0;background:#222;color:#eee;border:1px solid #444;box-sizing:border-box}
+pre{white-space:pre-wrap;font-size:12px;max-height:280px;overflow:auto}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.stat{font-size:28px;font-weight:600}
+</style></head><body>
+<h1>LIQA Control — 2 QA humans console</h1>
+<p>Workers execute. You only resolve <b>gates</b> and <b>sign-off</b>. OTP/MFA = Human Gate — never invent codes.</p>
+<div class="card grid" id="summary">
+  <div><h2>Workers headed</h2><div class="stat" id="sWorkers">…</div></div>
+  <div><h2>Gates waiting</h2><div class="stat warn" id="sGates">…</div></div>
+  <div><h2>Needs sign-off</h2><div class="stat" id="sSign">…</div></div>
+</div>
+<div class="card">
+  <b>Health</b> Control: <span id="ch">…</span> · Local worker probe: <span id="wh">…</span>
+</div>
+<div class="card">
+  <b>Queue headed job</b>
+  <input id="jira" placeholder="Jira KEY e.g. PF-55248">
+  <input id="story" placeholder="Story / task text">
+  <input id="url" placeholder="Entry URL (loaded once on worker)">
+  <button onclick="createJob()">Queue for Worker</button>
+</div>
+<div class="card">
+  <b>Resolve gate (Human 1)</b>
+  <input id="gateId" placeholder="Gate id">
+  <input id="gateUser" placeholder="Your name" value="qa-gate-lead">
+  <input id="gateNote" placeholder="Note e.g. OTP entered / SSO done / account supplied">
+  <button onclick="resolveGate()">Resolve gate</button>
+</div>
+<div class="card">
+  <b>Sign-off (Human 2)</b>
+  <input id="jobId" placeholder="Job id">
+  <input id="signUser" placeholder="Your name" value="qa-signoff-lead">
+  <input id="book1" placeholder="Book1 path on worker/share">
+  <button onclick="signOff(true)">Sign-off PASS</button>
+  <button onclick="signOff(false)">Reject</button>
+</div>
+<div class="card"><b>Ops summary</b><pre id="ops">loading</pre></div>
+<div class="card"><b>Gates</b><pre id="gates">loading</pre></div>
+<div class="card"><b>Jobs</b><pre id="jobs">loading</pre></div>
+<div class="card"><b>Workers</b><pre id="workers">loading</pre></div>
+<script>
+async function j(u,opt){const r=await fetch(u,opt);return r.json()}
+async function refresh(){
+  try{const c=await j('/health'); ch.textContent=c.ok?'OK':'DOWN'; ch.className=c.ok?'ok':'bad'}catch(e){ch.textContent='DOWN';ch.className='bad'}
+  try{const w=await j('http://127.0.0.1:8787/health'); wh.textContent=w.ok?'HEADED READY':'NOT HEADED'; wh.className=w.ok?'ok':'bad'}catch(e){wh.textContent='n/a';wh.className='warn'}
+  const ops=await j('/v1/ops/summary');
+  opsEl=document.getElementById('ops'); opsEl.textContent=JSON.stringify(ops,null,2);
+  sWorkers.textContent=ops.workers_headed ?? '—';
+  sGates.textContent=ops.gates_waiting ?? '—';
+  sSign.textContent=ops.jobs_needs_signoff ?? '—';
+  jobs.textContent=JSON.stringify(await j('/v1/jobs'),null,2);
+  workers.textContent=JSON.stringify(await j('/v1/workers'),null,2);
+  gates.textContent=JSON.stringify(await j('/v1/gates'),null,2);
+}
+async function createJob(){
+  await j('/v1/jobs',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({story:story.value,url:url.value,jiraKey:jira.value,mode:'headed'})});
+  refresh();
+}
+async function resolveGate(){
+  const id=gateId.value.trim(); if(!id) return alert('gate id required');
+  await j('/v1/gates/'+id+'/resolve',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({user:gateUser.value,note:gateNote.value})});
+  refresh();
+}
+async function signOff(ok){
+  const id=jobId.value.trim(); if(!id) return alert('job id required');
+  await j('/v1/jobs/'+id+'/signoff',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({user:signUser.value,book1Path:book1.value,pass:ok,note:ok?'accepted':'rejected'})});
+  refresh();
+}
+refresh(); setInterval(refresh,4000);
+</script>
+</body></html>

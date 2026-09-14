@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: LIQA Control
+  version: 0.1.0
+  description: Headed Worker orchestration. Not a headless SKU.
+servers:
+  - url: http://127.0.0.1:8788
+paths:
+  /health:
+    get:
+      summary: Live
+      responses:
+        "200":
+          description: OK
+  /v1/jobs:
+    get:
+      summary: List jobs
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Queue headed job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                story: { type: string }
+                url: { type: string }
+                tenant: { type: string }
+      responses:
+        "201":
+          description: Created
+  /v1/jobs/{id}:
+    get:
+      summary: Job detail
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+  /v1/jobs/{id}/cancel:
+    post:
+      summary: Cancel
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+  /v1/workers:
+    get:
+      summary: Registry
+      responses:
+        "200":
+          description: OK
+  /v1/workers/heartbeat:
+    post:
+      summary: Outbound worker heartbeat
+      responses:
+        "200":
+          description: OK
+  /v1/gates:
+    get:
+      summary: Human-gate inbox
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create gate
+      responses:
+        "201":
+          description: Created
+  /v1/gates/{id}/ack:
+    post:
+      summary: Human completed MFA/CAPTCHA
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: OK
+  /v1/tenants:
+    get:
+      summary: Tenants (no key hashes)
+      responses:
+        "200":
+          description: OK
+    post:
+      summary: Create tenant; apiKey shown once
+      responses:
+        "201":
+          description: Created

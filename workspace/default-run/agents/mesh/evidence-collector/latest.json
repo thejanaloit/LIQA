@@ -1,0 +1,9 @@
+{
+  "ts": "2026-09-14T05:58:26.728464+00:00",
+  "specialist": "evidence-collector",
+  "workstream": "proof",
+  "brief": "QA-trained pack verify",
+  "path": "E:\\agency-agents\\.cursor\\rules\\evidence-collector.mdc",
+  "qa_trained": true,
+  "qa_overlay": "E:\\LIQA\\packaging\\industry\\agency-qa-trained\\evidence-collector.md"
+}

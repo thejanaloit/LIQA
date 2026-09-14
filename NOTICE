@@ -1,0 +1,16 @@
+# NOTICE — third-party references
+
+Clones under vendor/oss/ (gitignored) are for study. We do not relicense them.
+
+Intended clones (Apache-2 / MIT):
+
+- steel-dev/steel-browser — Apache-2.0 — live headed sessions
+- web-infra-dev/midscene — GUI agent for E2E
+- zavora-ai/computer-use-mcp — MIT — Win32 computer use MCP
+
+Document-only (do not vendor source):
+
+- AskUI 3-layer architecture
+- Rainforest QA VM + visual runner
+- BrowserStack Local outbound tunnel
+- Karate on-prem computer-use (headless Docker is NOT our core)

@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "path": "E:\\LIQA\\reports\\book1-latest.csv",
+  "rows": 110,
+  "xlsx_note": "CSV first; embed PNG in Excel on Worker with openpyxl when licensed."
+}
