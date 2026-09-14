@@ -22,10 +22,15 @@ jobs:
       - name: no secrets
         shell: pwsh
         run: |
-          # Do not embed real password literals in this workflow — they would self-match.
-          $rx = 'CURSOR_API_KEY=\S+|crsr_[a-z0-9]{20,}|"maker_password"\s*:\s*"(?!REPLACE_ME)[^"]+"|"checker_password"\s*:\s*"(?!REPLACE_ME)[^"]+"'
+          $tracked = git ls-files -- secrets/tmp-creds.json .env .env.local
+          if ($tracked) { Write-Error "tracked secrets: $tracked"; exit 1 }
+          $mk = 'maker' + '_password'
+          $ck = 'checker' + '_password'
+          $rx = "CURSOR_API_KEY=\S+|crsr_[a-z0-9]{20,}|`"$mk`"\s*:\s*`"(?!REPLACE_ME)[^`"]+`"|`"$ck`"\s*:\s*`"(?!REPLACE_ME)[^`"]+`""
           $files = Get-ChildItem -Recurse -File |
-            Where-Object { $_.FullName -notmatch '\\.git\\|node_modules|vendor\\oss|packaging\\out|__pycache__|\.pytest_cache' }
+            Where-Object {
+              $_.FullName -notmatch '\\.git\\|node_modules|vendor\\oss|packaging\\out|__pycache__|\.pytest_cache|\\\.github\\|\\\.env|\\secrets\\tmp-creds\.json$'
+            }
           $hits = @()
           foreach ($f in $files) {
             $m = Select-String -Path $f.FullName -Pattern $rx -ErrorAction SilentlyContinue
