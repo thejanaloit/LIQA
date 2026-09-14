@@ -1,5 +1,5 @@
 # LIQA — install for Control / MCP / tests (Worker Hands use mss/Pillow via device_core)
-mcp>=1.2.0
+mcp>=2.2.0
 mss>=9.0.0
 Pillow>=10.0.0
 pyautogui>=0.9.54
