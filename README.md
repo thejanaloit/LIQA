@@ -2,6 +2,8 @@
 
 **Product:** one Cursor MCP that clones a human Manual QA engineer end-to-end.
 
+**Sigiri Manual steps (locked):** upload Xray steps with headed UI RPA — **no Xray API keys**. See **[docs/XRAY-UI-RPA.md](docs/XRAY-UI-RPA.md)** · MCP `liqa_xray_ui_method` · gold PF-59194.
+
 ## Give to other developers (same level)
 
 Other developers must hit the **same smoothness and Book1 quality** as PF-55248 SHARE — not a weaker fork.
@@ -74,6 +76,7 @@ cd E:\LIQA
 - Device: `liqa_capture`, `liqa_click`, `liqa_type`, `liqa_hotkey`, `liqa_browser_open`
 - Book1: `liqa_book1_sample`, `liqa_book1_append_row`, `liqa_book1_validate`
 - Honesty: `liqa_honesty_start` / `_attempt` / `_verdict`
+- Xray Manual steps (UI RPA): `liqa_xray_ui_method`, `liqa_xray_ui_import_csv`, `liqa_xray_ui_import_pack`, `liqa_xray_ui_import_registry`, `liqa_xray_end_of_run_upload`
 - Product: `liqa_product_status`, `liqa_resource_map`
 
 ## Guards (locked)
@@ -87,11 +90,15 @@ cd E:\LIQA
 
 ## Xray Manual-step upload (no API keys)
 
+Full guide: **[docs/XRAY-UI-RPA.md](docs/XRAY-UI-RPA.md)** · [scripts/README-xray-ui-rpa.md](scripts/README-xray-ui-rpa.md)
+
 ```powershell
 powershell -File scripts\start-xray-chrome-cdp.ps1
 $env:LIQA_CHROME_CDP = "http://127.0.0.1:9333"
 # MCP: liqa_xray_end_of_run_upload  |  CLI: py -3 scripts\xray_ui_upload_end_of_run.py upload
 ```
+
+Wizard: Import → **From csv...** → `#xray-csv-file` → Action\* / Data / Expected Result → Validate → Import Steps. Never Attachments. `force_reset` replaces wrong steps.
 
 ## Worker (optional desktop SKU)
 
