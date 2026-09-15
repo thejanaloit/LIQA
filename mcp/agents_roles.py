@@ -21,13 +21,15 @@ ROLES: dict[str, dict[str, Any]] = {
     },
     "intake": {
         "title": "Intake",
-        "mission": "Pull assigned Jira tasks, credentials request, stories + existing Xray refs.",
+        "mission": "Pull assigned Jira tasks, FULL attachment/epic harvest, credentials, stories + existing Xray refs.",
         "istqb_phases": [1, 2, 3],
         "contract": [
             "Save assignedTasks/<KEY>/ in plain English.",
+            "Follow linked feature/epic/parent; download ALL attachments to knowledgeBase/<KEY>/jira-attachments/.",
+            "liqa_jira_harvest_status.complete must be true before headed map.",
             "Request 2–3 credentials; never print passwords.",
             "Save UserStories/ and ExistingTestCases/ (read-only clones).",
-            "Announce planning intake done when ready.",
+            "Announce planning intake done only when harvest is complete.",
         ],
     },
     "mapper": {

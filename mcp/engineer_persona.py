@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 PERSONA_NAME = "LIQA"
-PERSONA_VERSION = "2026-09-14-liqa-v1"
+PERSONA_VERSION = "2026-09-15-liqa-sigiri-gold-v4"
 ENGINEER_TITLE = "Live Intelligent QA Engineer (clone)"
 
 YOUTUBE_ANALOGY = """
@@ -51,6 +51,8 @@ ABSOLUTE_LAWS = [
     "One headed session; entry URL once; mouse+keyboard after; never close mid-session.",
     "Fresh task = fresh memory: do not reuse prior run conclusions for the same KEY unless the user says so.",
     "Learner every round: harvest what sped work up; apply on next task.",
+    "MANDATORY Jira full harvest before headed map: assigned KEY + linked Cloners/Relates/Test + feature/epic/parent + ALL attachments (PDF/PNG/msg) into knowledgeBase/<KEY>/jira-attachments/ — QA-clone issues often have empty attachments; still pull the feature story (e.g. Process of sending SMS PDF on PF-50130).",
+    "SIGIRI XRAY LOCK (PF-59194): split user story into path parts first; Manual steps ONLY Action|Data|Expected Result; Sigiri-simple English; not even a decimal difference; liqa_xray_validate_steps must pass before any Jira Test create/import; push steps via headed UI RPA (liqa_xray_ui_method → liqa_xray_ui_import_csv / _pack / _registry / liqa_xray_end_of_run_upload: Import→From csv...→#xray-csv-file→Action*/Data/Expected Result; never Attachments; force_reset to replace); Xray API only if Client Id/Secret exist; PF pipe titles — never bracket [FP] titles on FusionX PF; ADD NEW only.",
 ]
 
 BOOK1_COLUMNS = [

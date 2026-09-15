@@ -10,7 +10,7 @@ from engineer_persona import (
     YOUTUBE_ANALOGY,
 )
 
-VERSION = "2026-09-14-liqa-v1"
+VERSION = "2026-09-15-liqa-sigiri-gold-v4"
 PROCESS = "ISTQB CTFL Fundamental Test Process + ISO/IEC/IEEE 29119-2 dynamic testing + SBTM"
 
 ISTQB_PHASES = [
@@ -21,10 +21,11 @@ ISTQB_PHASES = [
         "istqb": "Decide scope, risks, entry/exit, environments, who tests what.",
         "do": [
             "Pull Jira issues assigned to the user (Atlassian MCP). Save assignedTasks/<KEY>/ in plain English (epic + story).",
+            "MANDATORY Jira full harvest BEFORE headed work: KEY + linked Cloners/Relates/Test + feature/epic/parent + ALL attachments (PDF/PNG/msg) into knowledgeBase/<KEY>/jira-attachments/. Call liqa_jira_harvest_record / liqa_jira_harvest_status until complete=true.",
             "Request 2–3 credentials. After login, honestly say if access is enough.",
             "Dispatch agency specialists via liqa_agency_dispatch for parallel intake.",
             "Call liqa_learn_speed for shortcuts from prior rounds.",
-            "When planning artifacts exist, tell the user planning is complete.",
+            "When planning artifacts exist AND harvest.complete, tell the user planning is complete.",
         ],
         "folders": ["assignedTasks"],
         "ask_ok": True,
@@ -48,8 +49,10 @@ ISTQB_PHASES = [
         "title": "Test analysis",
         "istqb": "What to test — conditions from the test basis (stories, Confluence, existing tests).",
         "do": [
-            "Download user stories (Confluence / epic / story) into UserStories/<KEY>/.",
+            "Download user stories (Confluence / epic / story) into UserStories/<KEY>/ — include feature description from linked epic/feature (e.g. PF-50130).",
+            "Extract attachment text (PDF process docs) into knowledgeBase; treat as test basis.",
             "Clone existing Xray / is-tested-by cases into ExistingTestCases/<KEY>/ (read-only).",
+            "BLOCK headed map if liqa_jira_harvest_status.complete is false.",
             "Headed experience map (NO Pass/Fail): every story function, tab, button, dropdown. Save map/.",
         ],
         "folders": ["UserStories", "ExistingTestCases", "map"],
@@ -62,7 +65,8 @@ ISTQB_PHASES = [
         "istqb": "How to test — cases from EP, BVA, decision tables, state transition, exploratory charters.",
         "do": [
             "Harvest Jira tone into knowledgeBase/ (stories, tests, bugs) before inventing format.",
-            "Gold shapes: SSP-42118 stories, SSP-38278 / PF-59194 tests (is tested by).",
+            "Gold shapes: PF-59194 Sigiri Manual steps (Action|Data|Expected Result) + PF-55248 story shell; SSP refs only for SSP projects.",
+            "MANDATORY: liqa_xray_split_paths on the user story → draft steps per path → liqa_xray_validate_steps (guard) → liqa_xray_build_manual_test.",
             "Write NEW cases only. Never edit or delete existing Xray tests.",
         ],
         "folders": ["knowledgeBase", "NewTestCases"],
@@ -74,7 +78,9 @@ ISTQB_PHASES = [
         "title": "Test implementation",
         "istqb": "Prepare testware — data, procedures, environments, traceability.",
         "do": [
-            "Upload NEW tests to Jira. Sufficiency loop until count is enough (show count + enough yes/no).",
+            "Upload NEW tests to Jira (issue + Test link). Manual steps: prefer UI RPA over Xray API keys.",
+            "MANDATORY end-of-design/upload: liqa_xray_ui_method → liqa_xray_ui_import_csv / _pack / _registry (Import→From csv...→#xray-csv-file→Action*/Data/Expected Result). Never Attachments. force_reset if wrong steps already present.",
+            "Sufficiency loop until count is enough (show count + enough yes/no).",
             "Create outputs/<STORY>/ Book1 Excel: Area | Issue | Screenshot | What is testing | Why that failed your prediction | 2nd QA confirmation | Simple explanation.",
             "Content must match SHARE gold method (full English + embedded PNG every row).",
         ],
@@ -103,8 +109,9 @@ ISTQB_PHASES = [
         "do": [
             "Re-clarify honesty 3 cycles.",
             "liqa_learn_cycle + liqa_learn_speed: update skills and SPEED-PLAYBOOK.",
+            "Auto: liqa_complete_phase(7) / liqa_learn_cycle call liqa_xray_end_of_run_upload (headed UI RPA for all packs in jira-created.json).",
             "Evaluators must pass Book1 SHARE guards before share.",
-            "Close only when Book1 + Jira bugs (if any) + honesty are complete.",
+            "Close only when Book1 + Jira bugs (if any) + honesty + Manual steps upload are complete.",
         ],
         "folders": ["reports"],
         "ask_ok": False,
@@ -163,6 +170,13 @@ When the user says **use LIQA**, **liqa agent**, or **liqa mcp**:
 You **are the user** for Jira + device. Full permission to execute the flow.
 NEVER invent OTPs. NEVER commit passwords. NEVER edit/delete existing Xray tests (ADD NEW only).
 Ask ONLY on real blockers; otherwise complete the full QA without stopping.
+
+## Jira full harvest (locked — before headed map)
+Call liqa_jira_harvest_checklist. Pull assigned/clone KEY + Cloners/Relates/Test links +
+feature/epic/parent. Download ALL attachments (PDF/PNG/msg) into
+knowledgeBase/<KEY>/jira-attachments/ — QA clones often have empty attachments; still
+harvest the feature (e.g. SMS PDF on PF-50130). Record with liqa_jira_harvest_record until
+liqa_jira_harvest_status.complete=true. Block liqa_announce_planning_done otherwise.
 
 ## Industry method (locked)
 

@@ -105,37 +105,49 @@ def seed_format_refs() -> dict[str, Any]:
 
 
 def test_case_template(parent_key: str = "") -> dict[str, Any]:
+    """Sigiri PF-59194 Manual Xray template — Action | Data | Expected Result only."""
     key = parent_key or "STORY-KEY"
-    template = f"""Title: [Module] [Submodule][Feature][FP] - Validate that <behaviour>.
+    template = f"""# Sigiri Manual Xray Test (PF-59194 gold) — Parent {key}
 
-Affects versions:
-Status: Draft
-Assignee:
-Reporter:
-Labels: manual-qa, new
-Test Case Type: Functional
-Priority: Medium
-Parent: {key}
-Linked work items: is tested by → {key}
+**Summary (pipe taxonomy):** Lending Module | <Feature / Path> | Testcase writing and execution
 
-Preconditions:
-1. …
+**Link:** Test → tests → {key}  (Story shows is tested by)
 
-Steps:
-1. …
-2. …
+**Test Type:** Manual
 
-Test Comments:
+**Description:** (leave empty — steps live in Xray Manual table)
 
-Expected Result:
+## Path split (mandatory before steps)
+1. Read user story
+2. Identify path parts (UI journeys)
+3. Write one Manual pack per path (or ordered sections)
 
-Actual Result: (fill during headed execution)
+## Manual Steps columns (LOCKED — not even a decimal difference)
+| Action | Data | Expected Result |
+|--------|------|-----------------|
+| Log in as a user with <feature> access |  | User is logged in successfully |
+| Navigate to '<Module>' |  | The main module screen is displayed |
+| Navigate to '<Menu>' > '<Screen>' |  | The <Screen> is displayed with available options |
+
+## Rules
+- Data usually blank (or None in UI)
+- Short direct English — Sigiri-simple
+- Never use [Module][Sub][FP] - Validate that… on FusionX PF
+- ADD NEW only — never edit existing Xray
+- Call liqa_xray_validate_steps before Jira upload
 """
     dest = WORKSPACE / "NewTestCases" / "_templates"
     dest.mkdir(parents=True, exist_ok=True)
-    path = dest / "jira-functional-template.md"
+    path = dest / "sigiri-manual-xray-template.md"
     path.write_text(template, encoding="utf-8")
-    return {"ok": True, "path": str(path), "template": template, "parent_key": key}
+    return {
+        "ok": True,
+        "path": str(path),
+        "template": template,
+        "parent_key": key,
+        "gold": "PF-59194",
+        "columns": ["Action", "Data", "Expected Result"],
+    }
 
 
 def browser_open(url: str) -> dict[str, Any]:

@@ -94,7 +94,7 @@ def status_payload() -> dict[str, Any]:
     mon = state.get("monitor") or {}
     return {
         "ok": True,
-        "product": "ManualQA-Agent",
+        "product": "LIQA",
         "version": VERSION,
         "workspace": str(WORKSPACE),
         "current_phase": state.get("current_phase", 1),
@@ -130,7 +130,7 @@ def todo_list() -> dict[str, Any]:
     )
     return {
         "ok": True,
-        "product": "ManualQA-Agent",
+        "product": "LIQA",
         "current_phase": st.get("current_phase"),
         "monitor_ok": st.get("monitor_ok"),
         "blocker": st.get("blocker"),
@@ -280,19 +280,40 @@ def set_credentials_enough(enough: bool, notes: str = "") -> dict[str, Any]:
     return {"ok": True, "credentials": cred}
 
 
-def announce_planning_done() -> dict[str, Any]:
+def announce_planning_done(task_key: str = "") -> dict[str, Any]:
     state = ensure_workspace()
     for need in (1,):  # planning must be done; analysis intake may still be open
         if state["phases"]["1"].get("status") != "done":
             return {"ok": False, "error": "Complete phase 1 (planning) first"}
+    key = (task_key or state.get("active_task_key") or "").strip()
+    if key:
+        try:
+            from jira_harvest import harvest_status
+
+            hs = harvest_status(key)
+            if not hs.get("complete"):
+                return {
+                    "ok": False,
+                    "error": "Jira full harvest incomplete — block planning announce",
+                    "task_key": key,
+                    "harvest": hs,
+                    "law": (
+                        "Pull KEY + linked Cloners/Relates/Test + feature/epic/parent + "
+                        "ALL attachments into knowledgeBase/<KEY>/jira-attachments/, "
+                        "then liqa_jira_harvest_record until complete=true."
+                    ),
+                }
+        except Exception as e:  # noqa: BLE001
+            return {"ok": False, "error": f"harvest gate failed: {e}", "task_key": key}
     state["announced_planning_done"] = True
     save_state(state)
     return {
         "ok": True,
         "message": (
-            "Planning intake complete (assigned tasks + credentials path). "
+            "Planning intake complete (assigned tasks + credentials + Jira harvest). "
             "Continue ISTQB analysis (stories, existing tests, experience map)."
         ),
+        "task_key": key or None,
     }
 
 

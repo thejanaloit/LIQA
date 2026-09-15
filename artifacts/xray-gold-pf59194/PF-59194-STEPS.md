@@ -1,0 +1,130 @@
+# Existing Xray steps — cloned from PF-59194
+
+Source CSV: PF-59194-steps.csv
+Clone Test: [PF-59263](https://lolcgroupdev.atlassian.net/browse/PF-59263)
+Original: [PF-59194](https://lolcgroupdev.atlassian.net/browse/PF-59194)
+Story: [PF-55248](https://lolcgroupdev.atlassian.net/browse/PF-55248)
+Total steps: 120
+
+| # | Action | Data | Expected |
+|---|--------|------|----------|
+| 1 | Log in as a user with Receipt Reallocation access |  | User is logged in successfully |
+| 2 | Navigate to 'Loan Origination and Management' |  | The main module screen is displayed |
+| 3 | Navigate to 'Transaction Management' > 'Receipt Reallocation' |  | The Receipt Reallocation screen is displayed with available options |
+| 4 | Observe the validation message |  | Validation message: "Please select a contract before proceeding" is displayed |
+| 5 | Verify that the 'Create New' button is visible |  | 'Create New' button is visible and enabled |
+| 6 | On the Receipt Reallocation screen, click 'Create New' without selecting a contract |  | System prompts for contract selection |
+| 7 | Select a valid contract from the list |  | Contract details are displayed automatically |
+| 8 | Click 'Create New' again |  | New reallocation form is displayed for the selected contract |
+| 9 | Select a contract with both active and cancelled receipts |  | Contract details are displayed |
+| 10 | Search for receipts for the selected contract |  | Receipt list is displayed |
+| 11 | Review the list of receipts |  | Only active receipts are shown; cancelled receipts are excluded |
+| 12 | Attempt to search for a known cancelled receipt number |  | Cancelled receipt is not found in the results |
+| 13 | On the Receipt Reallocation screen, search and display receipts for a contract |  | Receipt grid is populated |
+| 14 | Enable the 'Transfer All Receipts to Excess Payment' toggle |  | All Excess Pay toggles in the grid become active |
+| 15 | Observe the state of each Excess Pay toggle |  | Each Excess Pay toggle is enabled by default |
+| 16 | Disable the main toggle |  | All grid-level Excess Pay toggles are deactivated |
+| 17 | With multiple receipts listed, attempt to update transaction type for a non-latest receipt |  | 'Update Transaction Type' action is disabled for non-latest receipts |
+| 18 | Attempt to update transaction type for the latest receipt |  | 'Update Transaction Type' action is enabled |
+| 19 | Click 'Update Transaction Type' for the latest receipt |  | Receipt Details popup is displayed |
+| 20 | Edit allocation amount and select a new transaction type |  | Changes are accepted and saved |
+| 21 | In the Receipt Details popup, attempt to edit allocation amount for an earlier allocation before the latest is adjusted |  | Edit is blocked; system enforces latest-first editing |
+| 22 | Edit allocation amount for the latest allocation |  | Edit is allowed and saved |
+| 23 | After adjusting the latest allocation, attempt to edit the previous allocation |  | Edit is now allowed |
+| 24 | Save changes and close the popup |  | Allocation changes are reflected in the grid |
+| 25 | Search for receipts including credit notes |  | Credit notes are listed in the grid |
+| 26 | Attempt to reallocate a credit note to a different transaction type |  | System blocks the action and displays a warning |
+| 27 | Attempt to reallocate a credit note to the same transaction type and due |  | Allocation is allowed and saved |
+| 28 | If no matching due is found, observe the system response |  | System keeps the credit note for the already allocated due and displays a message |
+| 29 | Complete a valid receipt reallocation and click 'Save' |  | Request is moved to the Pending Request tab with status 'Pending' |
+| 30 | In the Pending Request tab, select the saved request |  | Request details are displayed |
+| 31 | Click 'Approve' |  | Status changes to 'Approved' |
+| 32 | Repeat for 'Reject' and 'Return' actions |  | Status updates to 'Rejected' or 'Returned' accordingly |
+| 33 | In the Pending Request tab, select a request and click 'View Transaction Type' |  | Popup displays 'Allocated Transaction Types' and 'Newly Allocated Transaction Types' sections |
+| 34 | Verify that both sections are read-only |  | No editing is allowed in either section |
+| 35 | Check that all relevant fields are displayed in the grid |  | Transaction Type, Sub Type, Installment Number, Allocation Date, Allocation Amount are shown |
+| 36 | Close the popup |  | Popup closes and returns to the Pending Request tab |
+| 37 | Complete and approve a receipt reallocation |  | Status is updated to 'Approved' |
+| 38 | Check available actions for the reallocated receipt |  | 'Refund' and 'Reversal' actions are enabled |
+| 39 | Attempt to initiate a refund or reversal |  | System allows the action to proceed |
+| 40 | Complete the refund or reversal process |  | Receipt status is updated accordingly |
+| 41 | Navigate to 'Loan Origination and Management' > 'Account Maintenance' > 'Account Inquiry' |  | Account Inquiry screen is displayed |
+| 42 | Select an account and open the 'Receipt Details' tab |  | Receipt Details grid is displayed |
+| 43 | Verify the column order: Receipt Number, TR Number, Receipt Date, Value Date, Receipt Category, Deposit Type, Recipient Name, Amount Paid, Cheque Number, Status, Action |  | Columns are displayed in the defined order |
+| 44 | Check for the 'Allocation Status' column after 'Allocation Amount' |  | 'Allocation Status' column is present |
+| 45 | In the Receipt Details grid, locate a Temporary Receipt transaction with a TR Number hyperlink |  | TR Number is displayed as a clickable hyperlink |
+| 46 | Click the TR Number hyperlink |  | Stock Series Details popup is displayed |
+| 47 | Verify that the popup displays Temporary Receipt Book Number, Temporary Receipt Number, Current Holder, Assigned Date, Branch, Stock Item From, Stock Item To |  | All fields are displayed as per Non-Counter Deposit |
+| 48 | Close the popup |  | Popup closes and returns to Receipt Details grid |
+| 49 | In Receipt Details, view a receipt that has been fully reallocated |  | Allocation Status is 'Paid' for the new transaction type, 'Reversed' for the original |
+| 50 | View a receipt with partial reallocation |  | Allocation Status is 'Partial Paid' for both new and remaining original records |
+| 51 | Reverse a receipt and view its status |  | Allocation Status is 'Reversed' for all related records |
+| 52 | Confirm that statuses match the latest reallocation or reversal state |  | Statuses are accurate and consistent |
+| 53 | Complete a receipt reallocation for a loan account |  | Reallocation is approved and processed |
+| 54 | In Account Inquiry, open the Outstanding Balance popup for the account |  | Outstanding balances are displayed |
+| 55 | Verify that balances reflect the updated allocation amounts |  | Balances are recalculated and correct |
+| 56 | Open the Installment Details tab and verify status and allocation view |  | Installment details are updated and accurate |
+| 57 | Log in as a user without Receipt Reallocation permission |  | User is logged in successfully |
+| 58 | Attempt to access the Receipt Reallocation screen via menu or direct URL |  | Access is denied; user is redirected or shown an error message |
+| 59 | Attempt to perform receipt reallocation actions via API or UI |  | Actions are blocked; system enforces security |
+| 60 | Log in as an authorized user and verify access is granted |  | Authorized user can access and perform actions |
+| 61 | Log in and navigate to Receipt Reallocation screen |  | Screen is displayed |
+| 62 | Remain idle until session timeout occurs |  | Session expires after configured period |
+| 63 | Attempt to perform any action after timeout |  | User is redirected to login page |
+| 64 | Log in again and verify previous session is closed |  | New session is started; previous session is terminated |
+| 65 | Perform create, update, approve, reject, and reversal actions in Receipt Reallocation |  | Actions are completed successfully |
+| 66 | Access the audit log as an authorized user (if available) |  | Audit log displays all actions with user, timestamp, and action details |
+| 67 | Verify that rejected and cancelled records are not marked as approved in the audit trail |  | Audit trail reflects correct status for each action |
+| 68 | Attempt to view audit log as unauthorized user |  | Access is denied or restricted |
+| 69 | Complete a receipt reallocation and approve it |  | Reallocation is processed |
+| 70 | Access the GL posting module or report (if available) |  | GL entries are displayed |
+| 71 | Verify that GL entries reflect the updated allocation amounts and transaction types |  | GL postings are correct and consistent with reallocation |
+| 72 | Attempt a reallocation with invalid GL configuration |  | System blocks posting and displays an error |
+| 73 | In the Receipt Details popup, leave a mandatory field (e.g. Allocation Amount) blank |  | Field remains empty |
+| 74 | Attempt to save the allocation |  | Inline error: "Allocation Amount is required" is displayed below the field |
+| 75 | Fill all mandatory fields and save |  | Allocation is saved successfully |
+| 76 | Repeat for each mandatory field in the popup |  | Each field enforces validation as expected |
+| 77 | In the Receipt Details popup, enter an allocation amount below the minimum allowed |  | System rejects the value and displays an error |
+| 78 | Enter an allocation amount above the maximum allowed |  | System rejects the value and displays an error |
+| 79 | Enter allocation amount at the exact minimum and maximum boundaries |  | System accepts the values and saves the allocation |
+| 80 | Save and verify the allocation is reflected in the grid |  | Allocation is displayed with correct amount |
+| 81 | In the Receipt Details popup, enter a date in an invalid format (e.g. YYYY/MM/DD instead of DD/MM/YYYY) |  | System rejects the value and displays a format error |
+| 82 | Enter a valid date in DD/MM/YYYY format |  | System accepts the value |
+| 83 | Attempt to save with an invalid date |  | Save is blocked; error is displayed |
+| 84 | Save with a valid date and verify allocation |  | Allocation is saved and displayed correctly |
+| 85 | In the Receipt Details popup, leave the Transaction Type dropdown unselected |  | Attempt to save the allocation |
+| 86 | System displays an inline error: "Transaction Type is required" |  |  |
+| 87 | Select an invalid or unavailable option (if possible) |  | System rejects the selection and displays an error |
+| 88 | Select a valid option and save |  | Allocation is saved successfully |
+| 89 | On the Receipt Reallocation screen, display the receipt grid |  | Grid is displayed |
+| 90 | Verify columns: Receipt Number, Transaction Date, Deposit Type, Receipt Amount, Excess Pay, Action |  | All columns are present and in the correct order |
+| 91 | In the Receipt Details popup, verify columns: Transaction Type, Sub Type, Installment Number, Allocation Date, Allocation Amount |  | All columns are present and in the correct order |
+| 92 | Confirm that no columns are missing or out of order |  | Grid structure matches requirements |
+| 93 | On the Receipt Reallocation screen, display a grid with multiple pages of receipts |  | Grid is displayed with pagination controls |
+| 94 | Use pagination controls to navigate between pages |  | Records are paginated correctly; navigation works |
+| 95 | Use the search field to filter receipts by number or criteria |  | Matching records are displayed; non-matching records are hidden |
+| 96 | Search with no matching criteria |  | "No records found" message is displayed |
+| 97 | Remove or misconfigure required definitions in the system |  | Definitions are missing or invalid |
+| 98 | Attempt to perform receipt reallocation |  | System blocks the action and displays an error message |
+| 99 | Restore definitions and retry |  | Reallocation is allowed and proceeds |
+| 100 | Verify that error messages are clear and actionable |  | User is informed of missing configuration |
+| 101 | Log in as Maker and submit a new receipt reallocation |  | Submission is successful; status is 'Pending' |
+| 102 | Without logging out, attempt to approve the same request as Maker |  | System blocks the action and displays an error |
+| 103 | Log in as Checker and approve the request |  | Approval is allowed and status changes to 'Approved' |
+| 104 | Verify that role restrictions are enforced throughout the workflow |  | Only authorized roles can perform each action |
+| 105 | Approve or reject a receipt reallocation request |  | Status is updated accordingly |
+| 106 | Attempt to edit the request after approval or rejection |  | Edit action is disabled or blocked |
+| 107 | System displays a message: "Cannot edit an approved or rejected request" |  |  |
+| 108 | Attempt to edit a pending request |  | Edit is allowed for pending requests only |
+| 109 | Select a contract/account with no allocation order or due order mapped |  | Contract is selected |
+| 110 | Attempt manual allocation |  | System displays a validation error: "No allocation order or due order found" |
+| 111 | Configure allocation order and retry |  | Allocation is allowed and proceeds |
+| 112 | Verify that error messages are clear and actionable |  | User is informed of missing configuration |
+| 113 | Identify a receipt with active allocations or dependencies |  | Receipt is listed in the grid |
+| 114 | Attempt to delete the receipt |  | System blocks the action and displays an error message |
+| 115 | Remove dependencies and retry deletion |  | Deletion is allowed only when no active dependencies exist |
+| 116 | Verify that error messages are clear and actionable |  | User is informed of dependency restriction |
+| 117 | Complete a receipt reallocation and approve it |  | Reallocation is processed |
+| 118 | In Account Inquiry, open the Receipt Details tab for the affected account |  | Receipt details are updated to reflect the reallocation |
+| 119 | Verify that Allocation Status, amounts, and transaction types match the latest state |  | Data is synchronized and accurate |
+| 120 | Repeat for reversal and refund actions |  | All changes are reflected in Account Inquiry |

@@ -132,6 +132,21 @@ except ImportError:
     resources = None  # type: ignore
 
 try:
+    import sigiri_xray_contract as sigiri
+except ImportError:
+    sigiri = None  # type: ignore
+
+try:
+    import xray_import as xray_imp
+except ImportError:
+    xray_imp = None  # type: ignore
+
+try:
+    import xray_ui_import as xray_ui
+except ImportError:
+    xray_ui = None  # type: ignore
+
+try:
     from mcp.server.fastmcp import FastMCP
 except ImportError:
     from mcp.server.fastmcp import FastMCP  # type: ignore
@@ -211,8 +226,17 @@ def liqa_flow_chart() -> dict[str, Any]:
 
 @mcp.tool()
 def liqa_complete_phase(phase_id: int, notes: str = "") -> dict[str, Any]:
-    """Mark an ISTQB phase done (1..7). Prior phases must already be done."""
-    return flow.complete_phase(phase_id, notes)
+    """Mark an ISTQB phase done (1..7). Prior phases must already be done.
+
+    Phase 7 complete auto-runs Sigiri Xray UI RPA upload (no Xray API keys).
+    """
+    out = flow.complete_phase(phase_id, notes)
+    if out.get("ok") and int(phase_id) == 7 and xray_ui is not None:
+        try:
+            out["xray_end_of_run_upload"] = xray_ui.end_of_run_upload_registry(headed=True)
+        except Exception as e:  # noqa: BLE001
+            out["xray_end_of_run_upload"] = {"ok": False, "error": str(e)}
+    return out
 
 
 @mcp.tool()
@@ -243,9 +267,69 @@ def liqa_credentials_status(enough: bool | None = None, notes: str = "") -> dict
 
 
 @mcp.tool()
-def liqa_announce_planning_done() -> dict[str, Any]:
-    """Tell the user planning intake succeeded (after phase 1 done)."""
-    return flow.announce_planning_done()
+def liqa_announce_planning_done(task_key: str = "") -> dict[str, Any]:
+    """Tell the user planning intake succeeded (after phase 1 + Jira harvest complete)."""
+    return flow.announce_planning_done(task_key=task_key)
+
+
+@mcp.tool()
+def liqa_jira_harvest_checklist() -> dict[str, Any]:
+    """Mandatory Atlassian pull list before headed map (attachments + epic/feature links)."""
+    try:
+        from jira_harvest import checklist_for_agent
+    except ImportError:
+        return {"ok": False, "error": "jira_harvest missing"}
+    return checklist_for_agent()
+
+
+@mcp.tool()
+def liqa_jira_harvest_status(task_key: str) -> dict[str, Any]:
+    """Check whether full Jira harvest for KEY is complete (gate before headed map)."""
+    try:
+        from jira_harvest import harvest_status
+    except ImportError:
+        return {"ok": False, "error": "jira_harvest missing"}
+    return harvest_status(task_key)
+
+
+@mcp.tool()
+def liqa_jira_harvest_record(
+    task_key: str,
+    sources: str = "",
+    attachments_expected: int = 0,
+    attachment_names: str = "",
+    notes: str = "",
+    issue_fields: bool = False,
+    linked_issues: bool = False,
+    feature_or_epic: bool = False,
+    attachments: bool = False,
+    existing_xray: bool = False,
+    comments_or_description: bool = False,
+) -> dict[str, Any]:
+    """Record Jira harvest progress after Atlassian pulls. sources/attachment_names = comma-separated."""
+    try:
+        from jira_harvest import record_harvest
+    except ImportError:
+        return {"ok": False, "error": "jira_harvest missing"}
+    src = [s.strip() for s in (sources or "").split(",") if s.strip()]
+    names = [s.strip() for s in (attachment_names or "").split(",") if s.strip()]
+    buckets = {
+        "issue_fields": issue_fields,
+        "linked_issues": linked_issues,
+        "feature_or_epic": feature_or_epic,
+        "attachments": attachments,
+        "existing_xray": existing_xray,
+        "comments_or_description": comments_or_description,
+    }
+    return record_harvest(
+        task_key,
+        sources=src,
+        buckets=buckets,
+        attachments_expected=attachments_expected,
+        attachment_names=names,
+        notes=notes,
+        merge=True,
+    )
 
 
 @mcp.tool()
@@ -274,7 +358,15 @@ def liqa_save_map_node(key: str, content: str, filename: str = "map.md") -> dict
 
 @mcp.tool()
 def liqa_save_new_testcase(key: str, content: str, filename: str = "new-tc.md") -> dict[str, Any]:
-    """Save NEW test case under NewTestCases/<KEY>/. Never edit existing Xray."""
+    """Save NEW test case under NewTestCases/<KEY>/. Never edit existing Xray.
+
+    GUARD: if content contains Manual step tables, must pass Sigiri PF-59194
+    Action|Data|Expected Result contract or save is blocked.
+    """
+    if sigiri is not None:
+        gate = sigiri.gate_save_new_testcase(content)
+        if gate.get("stop_upload"):
+            return {"ok": False, "blocked": True, **gate}
     return flow.save_md("NewTestCases", key, filename, content)
 
 
@@ -569,7 +661,10 @@ def liqa_human_gate(kind: str = "other", prompt: str = "Human action required", 
 
 @mcp.tool()
 def liqa_learn_cycle(notes: str = "", task_key: str = "") -> dict[str, Any]:
-    """ISTQB completion learn cycle + speed playbook uplift."""
+    """ISTQB completion learn cycle + speed playbook uplift.
+
+    Also runs end-of-run Xray UI RPA upload for every pack in jira-created.json.
+    """
     base: dict[str, Any] = {"ok": True, "notes": notes}
     if extras is not None and hasattr(extras, "learn_cycle"):
         try:
@@ -585,6 +680,11 @@ def liqa_learn_cycle(notes: str = "", task_key: str = "") -> dict[str, Any]:
     except Exception:  # noqa: BLE001
         skills = []
     base["skills"] = [p.name for p in skills]
+    if xray_ui is not None:
+        try:
+            base["xray_end_of_run_upload"] = xray_ui.end_of_run_upload_registry(headed=True)
+        except Exception as e:  # noqa: BLE001
+            base["xray_end_of_run_upload"] = {"ok": False, "error": str(e)}
     return base
 
 
@@ -776,10 +876,225 @@ def liqa_seed_format_refs() -> dict[str, Any]:
 
 @mcp.tool()
 def liqa_test_case_template(parent_key: str = "") -> dict[str, Any]:
-    """Emit Jira-shaped functional test template for NEW cases only."""
+    """Emit Sigiri PF-59194 Manual test template (Action|Data|Expected Result)."""
     if extras is None:
         return {"ok": False, "error": "engineer_extras missing"}
     return extras.test_case_template(parent_key)
+
+
+@mcp.tool()
+def liqa_sigiri_laws() -> dict[str, Any]:
+    """Locked Sigiri/TestCrafters Xray Manual step laws (PF-59194 gold)."""
+    if sigiri is None:
+        return {"ok": False, "error": "sigiri_xray_contract unavailable"}
+    return sigiri.laws()
+
+
+@mcp.tool()
+def liqa_xray_gold_steps(limit: int = 0) -> dict[str, Any]:
+    """Load PF-59194 gold Manual steps CSV (Action|Data|Expected Result)."""
+    if sigiri is None:
+        return {"ok": False, "error": "sigiri_xray_contract unavailable"}
+    return sigiri.load_gold_steps(limit=int(limit or 0))
+
+
+@mcp.tool()
+def liqa_xray_split_paths(story_key: str, story_text: str = "", paths_json: str = "") -> dict[str, Any]:
+    """Split user story into path parts before writing Manual steps (owner law)."""
+    if sigiri is None:
+        return {"ok": False, "error": "sigiri_xray_contract unavailable"}
+    return sigiri.split_story_paths(story_key, story_text, paths_json=paths_json)
+
+
+@mcp.tool()
+def liqa_xray_validate_steps(steps_json: str, require_min: int = 1) -> dict[str, Any]:
+    """Guard: validate Manual steps are Sigiri-simple Action|Data|Expected Result. Blocks upload on fail."""
+    if sigiri is None:
+        return {"ok": False, "error": "sigiri_xray_contract unavailable"}
+    return sigiri.validate_steps(steps_json, require_min=int(require_min or 1))
+
+
+@mcp.tool()
+def liqa_xray_build_manual_test(
+    story_key: str,
+    path_id: str,
+    path_name: str,
+    steps_json: str,
+    summary: str = "",
+) -> dict[str, Any]:
+    """Build CSV+MD Manual pack after guard pass — ready for Xray Import / ADD NEW Test."""
+    if sigiri is None:
+        return {"ok": False, "error": "sigiri_xray_contract unavailable"}
+    return sigiri.build_manual_pack(story_key, path_id, path_name, steps_json, summary=summary)
+
+
+@mcp.tool()
+def liqa_xray_validate_title(summary: str) -> dict[str, Any]:
+    """Guard: PF titles must follow Sigiri pipe taxonomy (not bracket FP titles)."""
+    if sigiri is None:
+        return {"ok": False, "error": "sigiri_xray_contract unavailable"}
+    return sigiri.validate_title(summary)
+
+
+@mcp.tool()
+def liqa_xray_credentials_status() -> dict[str, Any]:
+    """Check whether Xray Cloud API keys are configured for Manual-step import."""
+    if xray_imp is None:
+        return {"ok": False, "error": "xray_import module unavailable"}
+    return xray_imp.credentials_status()
+
+
+@mcp.tool()
+def liqa_xray_set_credentials(client_id: str, client_secret: str, base_url: str = "") -> dict[str, Any]:
+    """Save Xray API Client Id/Secret to secrets/xray.env (gitignored). Never commit."""
+    if xray_imp is None:
+        return {"ok": False, "error": "xray_import module unavailable"}
+    return xray_imp.save_credentials(client_id, client_secret, base_url=base_url)
+
+
+@mcp.tool()
+def liqa_xray_import_steps(issue_key: str, steps_json: str, replace: bool = True) -> dict[str, Any]:
+    """Push Sigiri Manual steps (Action|Data|Expected Result JSON) into an existing Xray Test.
+
+    Guard: validates steps first. Uses Xray GraphQL addTestStep (replace=True clears first).
+    Requires Xray API keys via liqa_xray_set_credentials or secrets/xray.env.
+    """
+    if xray_imp is None:
+        return {"ok": False, "error": "xray_import module unavailable"}
+    return xray_imp.import_steps(issue_key, steps_json, replace=bool(replace))
+
+
+@mcp.tool()
+def liqa_xray_import_csv(issue_key: str, csv_path: str, replace: bool = True) -> dict[str, Any]:
+    """Import a Sigiri CSV (Action,Data,Expected Result) into Xray Manual steps on issue_key."""
+    if xray_imp is None:
+        return {"ok": False, "error": "xray_import module unavailable"}
+    return xray_imp.import_csv(issue_key, csv_path, replace=bool(replace))
+
+
+@mcp.tool()
+def liqa_xray_import_pack(
+    story_key: str,
+    pack_id: str,
+    issue_key: str,
+    replace: bool = True,
+) -> dict[str, Any]:
+    """Import NewTestCases/<story>/sigiri-manual/<pack>/<pack>-steps.csv into Xray Test."""
+    if xray_imp is None:
+        return {"ok": False, "error": "xray_import module unavailable"}
+    return xray_imp.import_pack(story_key, pack_id, issue_key, replace=bool(replace))
+
+
+@mcp.tool()
+def liqa_xray_import_registry(registry_json_path: str = "") -> dict[str, Any]:
+    """Import every pack in jira-created.json (default PF-58380 Sigiri registry) into Xray."""
+    if xray_imp is None:
+        return {"ok": False, "error": "xray_import module unavailable"}
+    return xray_imp.import_registry(registry_json_path)
+
+
+@mcp.tool()
+def liqa_xray_ui_method() -> dict[str, Any]:
+    """Return the locked Sigiri/Xray UI CSV import method (Action*|Data|Expected Result wizard).
+
+    Use this before end-of-run upload. Prefer UI RPA over Xray API keys (often unavailable).
+    """
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.proven_method()
+
+
+@mcp.tool()
+def liqa_xray_ui_import_csv(
+    issue_key: str,
+    csv_path: str,
+    headed: bool = True,
+    add_step_fallback: bool = True,
+    force_reset: bool = False,
+) -> dict[str, Any]:
+    """RPA: open Jira Test in Chrome and Import Manual steps CSV (no Xray API keys needed).
+
+    Proven path: Import → From csv... → #xray-csv-file → map Action*/Data/Expected Result
+    → Validate → Import Steps → wait dialog close. Never use Attachments.
+    force_reset=True: click Reset Current Test Steps and replace existing Manual steps.
+    First run may show Jira login — secrets/jira-ui-login.json or sign in once (OTP yourself).
+    """
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.import_issue_ui(
+        issue_key,
+        csv_path,
+        headed=bool(headed),
+        add_step_fallback=bool(add_step_fallback),
+        force_reset=bool(force_reset),
+    )
+
+
+@mcp.tool()
+def liqa_xray_ui_import_pack(
+    story_key: str,
+    pack_id: str,
+    issue_key: str,
+    headed: bool = True,
+    force_reset: bool = False,
+) -> dict[str, Any]:
+    """RPA: import sigiri-manual/<pack> CSV into Xray Test via headed UI."""
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.import_pack_ui(
+        story_key,
+        pack_id,
+        issue_key,
+        headed=bool(headed),
+        force_reset=bool(force_reset),
+    )
+
+
+@mcp.tool()
+def liqa_xray_ui_import_registry(
+    registry_json_path: str = "",
+    headed: bool = True,
+    force_reset: bool = False,
+) -> dict[str, Any]:
+    """RPA end-of-run: import every pack in jira-created.json via headed Chrome (no API keys)."""
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.import_registry_ui(
+        registry_json_path,
+        headed=bool(headed),
+        force_reset=bool(force_reset),
+    )
+
+
+@mcp.tool()
+def liqa_xray_upload_after_run(issue_key: str, csv_path: str) -> dict[str, Any]:
+    """End-of-run hook: try Xray API if keys exist, else UI RPA Import/Add Step."""
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.maybe_ui_import_after_run(issue_key, csv_path)
+
+
+@mcp.tool()
+def liqa_xray_ui_ensure_login(wait_seconds: int = 600, probe_issue: str = "PF-59477") -> dict[str, Any]:
+    """One-time: open Chrome profile and wait while you log into Jira (OTP yourself)."""
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.ensure_jira_login(
+        wait_seconds=int(wait_seconds),
+        headed=True,
+        probe_issue=probe_issue,
+    )
+
+
+@mcp.tool()
+def liqa_xray_end_of_run_upload(registry_json_path: str = "", headed: bool = True) -> dict[str, Any]:
+    """Upload all Sigiri packs from jira-created.json via headed UI RPA (auto on phase 7 / learn).
+
+    Prefer this over Xray API keys. Contract: liqa_xray_ui_method.
+    """
+    if xray_ui is None:
+        return {"ok": False, "error": "xray_ui_import module unavailable"}
+    return xray_ui.end_of_run_upload_registry(registry_json_path, headed=bool(headed))
 
 
 @mcp.tool()

@@ -15,6 +15,7 @@ When the user says **use LIQA** / **liqa agent** / **liqa mcp**:
 5. Run ISTQB 1→7 headed Eyes→Brain→Hands. Ask ONLY on real blockers (OTP/MFA/missing data).
 6. Book1 must match SHARE gold content method + 100% screenshots; validate before share.
 7. Honesty-20 before REAL_BUG. Never invent OTP. Never commit secrets.
-8. Close with `liqa_learn_cycle`.
+8. Sigiri Manual steps: `liqa_xray_ui_method` then UI RPA upload (`liqa_xray_ui_import_*` / `liqa_xray_end_of_run_upload`) — Import→From csv...→#xray-csv-file→Action*/Data/Expected Result. Never Attachments. Prefer RPA over Xray API keys. `force_reset` to replace wrong steps. Auto on phase 7 / learn.
+9. Close with `liqa_learn_cycle`.
 
 Primary MCP key: `liqa`. Home: `E:\LIQA`.

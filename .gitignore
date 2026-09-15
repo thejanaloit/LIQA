@@ -5,7 +5,11 @@
 secrets/**
 !secrets/
 !secrets/*.example.json
+!secrets/*.env.example
 !secrets/tmp-creds.example.json
+workspace/**/secrets/**
+!workspace/**/secrets/
+!workspace/**/secrets/*.example.json
 captures/
 jobs/
 trajectories/
@@ -34,4 +38,8 @@ Thumbs.db
 packaging/out/
 workspace/default-run/agents/mesh/assignments.jsonl
 workspace/**/captures/
+workspace/**/.chrome-*/
+workspace/**/.chrome-xray-ui-import/
+workspace/**/reports/xray-ui-import/
 *.log
+

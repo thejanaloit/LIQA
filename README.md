@@ -83,6 +83,15 @@ cd E:\LIQA
 - Human Gate for OTP/MFA — never invent codes
 - Evaluators block share on gold parity fail
 - Secrets only under `secrets/` (gitignored)
+- Sigiri Manual steps: UI RPA (`liqa_xray_ui_method` / `scripts/README-xray-ui-rpa.md`) — prefer over Xray API keys; never Attachments
+
+## Xray Manual-step upload (no API keys)
+
+```powershell
+powershell -File scripts\start-xray-chrome-cdp.ps1
+$env:LIQA_CHROME_CDP = "http://127.0.0.1:9333"
+# MCP: liqa_xray_end_of_run_upload  |  CLI: py -3 scripts\xray_ui_upload_end_of_run.py upload
+```
 
 ## Worker (optional desktop SKU)
 
