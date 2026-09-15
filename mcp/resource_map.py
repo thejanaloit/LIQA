@@ -17,6 +17,7 @@ def map_resources() -> dict[str, Any]:
         "agency_agents": AGENCY_ROOT,
         "book1_gold": REPO_ROOT / "artifacts" / "book1-samples",
         "skills": REPO_ROOT / "skills",
+        "lolc_pack": REPO_ROOT / "packaging" / "lolc",
     }
     out = {}
     for k, p in sources.items():
@@ -42,5 +43,10 @@ def map_resources() -> dict[str, Any]:
             "chrome-bridge",
             "AIThejaBrowser",
         ],
-        "message": "LIQA MCP is the primary surface; peers are called by the agent as needed.",
+        "lolc_overlay": {
+            "path": str(REPO_ROOT / "packaging" / "lolc"),
+            "version": "2026-09-16-lolc-fusionx-v1",
+            "replaces_perfect100": False,
+        },
+        "message": "LIQA MCP is the primary surface; LOLC pack is a separate FusionX overlay; peers are called by the agent as needed.",
     }

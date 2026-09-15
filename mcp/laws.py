@@ -224,4 +224,5 @@ Roles: orchestrator|intake|mapper|designer|executor|honesty_referee|book1_report
 Agency: liqa_agency_list / liqa_agency_dispatch (250+ specialists).
 Learner: liqa_learn_speed / liqa_learn_cycle.
 Do NOT use QAFusionX runSuite as Manual QA. Primary MCP key: liqa.
+LOLC FusionX/PF: after boot call liqa_lolc_laws (separate pack packaging/lolc — does not replace Perfect-100).
 """

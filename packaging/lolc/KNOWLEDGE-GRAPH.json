@@ -1,0 +1,36 @@
+{
+  "entities": [
+    {"id": "site.lolcgroupdev", "type": "jira_site", "url": "https://lolcgroupdev.atlassian.net"},
+    {"id": "project.PF", "type": "jira_project", "product": "FusionX"},
+    {"id": "issuetype.Story", "jira_id": "10001"},
+    {"id": "issuetype.Test", "jira_id": "10023", "note": "Xray Test"},
+    {"id": "issuetype.Bug", "jira_id": "10005"},
+    {"id": "gold.PF-59194", "type": "xray_test", "writer": "SIGIRI JAYASEKARA", "status": "DONE"},
+    {"id": "gold.PF-55248", "type": "story", "reporter": "Theeksha Dumini", "assignee": "SIGIRI JAYASEKARA", "labels": ["TestCrafters", "V69_Testing"]},
+    {"id": "gold.PF-59486", "type": "story_clone", "bar": "LIQA Perfect-100"},
+    {"id": "gold.PF-59174", "type": "bug", "writer": "SIGIRI JAYASEKARA", "assignee": "Tishan Dhanuja"},
+    {"id": "env.kenya_uat", "app": "https://uat.fusionx.biz", "channel": "GBAF", "tenant": "cNwNb"},
+    {"id": "role.maker", "example": "ThejanaD"},
+    {"id": "role.checker", "example": "MethmiB"},
+    {"id": "label.TestCrafters", "type": "qa_squad"},
+    {"id": "label.V69_Testing", "type": "release_wave"},
+    {"id": "confluence.QA-Process", "id": "171638816", "form": "diagram-only"},
+    {"id": "teams.AI-QA-Agent", "type": "teams_group", "people": 22, "org": "IT/EKO/LOITS"},
+    {"id": "squad.TestCrafters", "type": "qa_squad", "gold": "SIGIRI JAYASEKARA"},
+    {"id": "squad.Autobots", "type": "qa_squad", "gold": "Janani Kariyawasam"},
+    {"id": "squad.Shielders", "type": "qa_squad", "gold": "Asirimath Karunathilake"},
+    {"id": "book1.PF-59462", "type": "teams_share", "file": "PF-59462-Book1-SHARE.xlsx"},
+    {"id": "book1.PF-59472", "type": "teams_share", "file": "PF-59472-Book1-SHARE.xlsx"}
+  ],
+  "edges": [
+    {"from": "gold.PF-59486", "rel": "clones", "to": "gold.PF-55248"},
+    {"from": "gold.PF-59194", "rel": "tests", "to": "gold.PF-55248"},
+    {"from": "issuetype.Test", "rel": "is_tested_by", "to": "issuetype.Story"},
+    {"from": "gold.PF-59174", "rel": "filed_by_squad", "to": "label.TestCrafters"},
+    {"from": "role.maker", "rel": "cannot_approve_own", "to": "role.checker"},
+    {"from": "project.PF", "rel": "runs_on", "to": "env.kenya_uat"},
+    {"from": "teams.AI-QA-Agent", "rel": "delivers", "to": "book1.PF-59462"},
+    {"from": "teams.AI-QA-Agent", "rel": "delivers", "to": "book1.PF-59472"},
+    {"from": "squad.Autobots", "rel": "files_as", "to": "label.TestCrafters"}
+  ]
+}

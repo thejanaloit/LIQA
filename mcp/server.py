@@ -147,6 +147,11 @@ except ImportError:
     xray_ui = None  # type: ignore
 
 try:
+    import lolc_pack as lolc
+except ImportError:
+    lolc = None  # type: ignore
+
+try:
     from mcp.server.fastmcp import FastMCP
 except ImportError:
     from mcp.server.fastmcp import FastMCP  # type: ignore
@@ -1325,8 +1330,81 @@ def liqa_product_status() -> dict[str, Any]:
         "agency_qa_trained": train,
         "perfect100_ref": "PF-59486",
         "perfect100_doctrine": "skills/PERFECT-100-PF-59486-GOLD.md",
-        "message": "LIQA Perfect-100 (PF-59486) ready — call liqa_boot to start ISTQB flow.",
+        "lolc_pack": lolc.status() if lolc is not None else {"ok": False},
+        "message": "LIQA Perfect-100 (PF-59486) ready — call liqa_boot. For FusionX/PF also call liqa_lolc_laws.",
     }
+
+
+@mcp.tool()
+def liqa_lolc_status() -> dict[str, Any]:
+    """LOLC FusionX overlay pack status (separate from Perfect-100)."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.status()
+
+
+@mcp.tool()
+def liqa_lolc_laws() -> dict[str, Any]:
+    """How LOLC QA engineers write on lolcgroupdev project PF."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.laws()
+
+
+@mcp.tool()
+def liqa_lolc_onboard() -> dict[str, Any]:
+    """New-employee checklist to adapt LIQA to the LOLC FusionX environment."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.onboard()
+
+
+@mcp.tool()
+def liqa_lolc_environment() -> dict[str, Any]:
+    """Kenya UAT / GBAF / cNwNb / maker-checker map for FusionX."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.environment()
+
+
+@mcp.tool()
+def liqa_lolc_people() -> dict[str, Any]:
+    """QA engineers observed on live PF Tests — copy their tone."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.people()
+
+
+@mcp.tool()
+def liqa_lolc_check_test_title(title: str) -> dict[str, Any]:
+    """Guard PF Xray/Story titles (pipes ok, [FP] rejected)."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.check_test_title(title)
+
+
+@mcp.tool()
+def liqa_lolc_check_bug_title(title: str) -> dict[str, Any]:
+    """Guard PF bug titles (TestCrafters hashtag + failure sentence)."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.check_bug_title(title)
+
+
+@mcp.tool()
+def liqa_lolc_graph() -> dict[str, Any]:
+    """LOLC QA knowledge graph (PF entities and link types)."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.knowledge_graph()
+
+
+@mcp.tool()
+def liqa_lolc_manifest() -> dict[str, Any]:
+    """Files in packaging/lolc plus MCP tool names."""
+    if lolc is None:
+        return {"ok": False, "error": "lolc_pack missing"}
+    return lolc.manifest()
 
 
 if __name__ == "__main__":

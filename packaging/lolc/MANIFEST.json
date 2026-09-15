@@ -1,0 +1,22 @@
+{
+  "pack": "lolc-fusionx",
+  "version": "2026-09-16-lolc-fusionx-v1",
+  "parent": "LIQA Perfect-100 2026-09-16-liqa-perfect-100-v5",
+  "site": "https://lolcgroupdev.atlassian.net",
+  "project": "PF",
+  "product": "FusionX",
+  "evidence_date": "2026-09-16",
+  "evidence_user": "thejanad@lolctech.com",
+  "gold": {
+    "sigiri_test": "PF-59194",
+    "story": "PF-55248",
+    "perfect100": "PF-59486",
+    "bug_style": "PF-59174",
+    "teams_group": "AI QA Agent",
+    "teams_book1": ["PF-59462", "PF-59472"]
+  },
+  "teams_people": 22,
+  "squads": ["TestCrafters", "Autobots", "Shielders", "GlobalSupport"],
+  "separate": true,
+  "replaces_perfect100": false
+}
