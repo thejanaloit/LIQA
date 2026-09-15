@@ -11,7 +11,7 @@ If somebody asks for the **LIQA full stable v1 version chat**, give:
 **→ [`artifacts/stable-v1/chat/FULL-CHAT.raw.jsonl`](artifacts/stable-v1/chat/FULL-CHAT.raw.jsonl)** — raw transcript  
 **→ Tag:** `stable-v1` on this repo
 
-See **[docs/STABLE-V1.md](docs/STABLE-V1.md)**.
+See **[docs/STABLE-V1.md](docs/STABLE-V1.md)** · **[docs/PROCESS-MAP-COMPLETE.md](docs/PROCESS-MAP-COMPLETE.md)** · **[artifacts/stable-v1/process-map/](artifacts/stable-v1/process-map/)**.
 
 **Sigiri Manual steps (locked):** upload Xray steps with headed UI RPA — **no Xray API keys**. See **[docs/XRAY-UI-RPA.md](docs/XRAY-UI-RPA.md)** · MCP `liqa_xray_ui_method` · gold PF-59194.
 

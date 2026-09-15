@@ -29,5 +29,6 @@ py -3 scripts\export_stable_v1_chat.py
 - Sigiri Xray UI RPA (subprocess if asyncio)
 - Bug dedupe before createJiraIssue
 - 279 agency-qa-trained overlays
+- **Full micro-process map:** [`artifacts/stable-v1/process-map/`](../artifacts/stable-v1/process-map/)
 
 Doctrine: [`skills/PERFECT-100-PF-59486-GOLD.md`](../skills/PERFECT-100-PF-59486-GOLD.md)

@@ -123,6 +123,8 @@ ISTQB_PHASES = [
 
 FLOW_CHART_MD = """# LIQA Engineer — ISTQB flow
 
+**Full micro-process map (do not miss):** `artifacts/stable-v1/process-map/README.md` · `MICROPROCESSES.json`
+
 ```mermaid
 flowchart TD
   BOOT[liqa_boot] --> PLAN[1 Planning]
@@ -158,6 +160,9 @@ flowchart TD
 
 ## Device loop (every action)
 EYES (full desktop PNG) → BRAIN → HANDS (type/hotkey/click) → WAIT frame → capture again.
+
+## Perfect-100
+Reference run PF-59486. Every specialist uses agency-qa-trained Perfect-100 overlays.
 """
 
 GLOBAL_RULES = f"""

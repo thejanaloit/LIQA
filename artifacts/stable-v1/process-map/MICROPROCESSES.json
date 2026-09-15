@@ -1,0 +1,2246 @@
+{
+  "product": "LIQA",
+  "label": "Full micro-process catalog \u2014 Stable V1 / Perfect-100",
+  "mcp_version": "2026-09-16-liqa-perfect-100-v5",
+  "perfect100_ref": "PF-59486",
+  "agency_train": "2026-09-16-qa-trained-perfect-100-v2",
+  "agency_count": 279,
+  "tool_count": 98,
+  "tools": [
+    "liqa_boot",
+    "liqa_laws",
+    "liqa_engineer_persona",
+    "liqa_status",
+    "liqa_todo_list",
+    "liqa_flow_chart",
+    "liqa_complete_phase",
+    "liqa_set_notes",
+    "liqa_heartbeat",
+    "liqa_request_credentials",
+    "liqa_credentials_status",
+    "liqa_announce_planning_done",
+    "liqa_jira_harvest_checklist",
+    "liqa_jira_harvest_status",
+    "liqa_jira_harvest_record",
+    "liqa_save_assigned_task",
+    "liqa_save_user_story",
+    "liqa_save_existing_testcase",
+    "liqa_save_map_node",
+    "liqa_save_new_testcase",
+    "liqa_save_knowledge",
+    "liqa_testcase_sufficiency",
+    "liqa_role_list",
+    "liqa_role_start",
+    "liqa_role_status",
+    "liqa_role_dispatch",
+    "liqa_book1_sample",
+    "liqa_book1_append_row",
+    "liqa_book1_validate",
+    "liqa_list_outputs",
+    "liqa_file_bug_draft",
+    "liqa_honesty_start",
+    "liqa_honesty_attempt",
+    "liqa_honesty_verdict",
+    "liqa_device_status",
+    "liqa_capture",
+    "liqa_click",
+    "liqa_click_text",
+    "liqa_move",
+    "liqa_type",
+    "liqa_hotkey",
+    "liqa_wait_frame",
+    "liqa_list_windows",
+    "liqa_focus_window",
+    "liqa_human_gate",
+    "liqa_learn_cycle",
+    "liqa_list_skills",
+    "liqa_orchestrator_assign",
+    "liqa_company_status",
+    "liqa_fresh_task",
+    "liqa_self_assign",
+    "liqa_await_otp_field",
+    "liqa_ack_gate",
+    "liqa_browser_open",
+    "liqa_sbtm_charter",
+    "liqa_revalidate_cycle",
+    "liqa_seed_format_refs",
+    "liqa_test_case_template",
+    "liqa_sigiri_laws",
+    "liqa_xray_gold_steps",
+    "liqa_xray_split_paths",
+    "liqa_xray_validate_steps",
+    "liqa_xray_build_manual_test",
+    "liqa_xray_validate_title",
+    "liqa_xray_credentials_status",
+    "liqa_xray_set_credentials",
+    "liqa_xray_import_steps",
+    "liqa_xray_import_csv",
+    "liqa_xray_import_pack",
+    "liqa_xray_import_registry",
+    "liqa_xray_ui_method",
+    "liqa_xray_ui_import_csv",
+    "liqa_xray_ui_import_pack",
+    "liqa_xray_ui_import_registry",
+    "liqa_xray_upload_after_run",
+    "liqa_xray_ui_ensure_login",
+    "liqa_xray_end_of_run_upload",
+    "liqa_evaluate_all",
+    "liqa_stop_the_line",
+    "liqa_proof_crop",
+    "liqa_list_monitors",
+    "liqa_recursive_step",
+    "liqa_calibrate_viewport",
+    "liqa_viewport_click",
+    "liqa_persona",
+    "liqa_list_roles",
+    "liqa_press",
+    "liqa_hotkey_chord",
+    "liqa_device_loop",
+    "liqa_agency_list",
+    "liqa_agency_dispatch",
+    "liqa_mesh_status",
+    "liqa_agency_train_status",
+    "liqa_agency_trained_prompt",
+    "liqa_learn_speed",
+    "liqa_learn_record",
+    "liqa_resource_map",
+    "liqa_product_status"
+  ],
+  "microprocess_count": 107,
+  "microprocesses": [
+    {
+      "id": "MP-000",
+      "name": "Connect agency-agents source",
+      "phase": "meta-genesis",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [],
+      "steps": [
+        "Clone/connect msitarzewski/agency-agents"
+      ],
+      "outputs": [
+        "agency-agents workspace"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-001",
+      "name": "Handover intent: company MCP for Manual QA",
+      "phase": "meta-genesis",
+      "agents": [
+        "orchestrator",
+        "product-manager"
+      ],
+      "tools": [],
+      "steps": [
+        "Owner defines YouTube Manual QA analogy + 10-step doctrine"
+      ],
+      "outputs": [
+        "owner doctrine notes"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-002",
+      "name": "Absorb ManualQA + QAFusionX repos",
+      "phase": "meta-genesis",
+      "agents": [
+        "codebase-archaeologist",
+        "software-architect"
+      ],
+      "tools": [],
+      "steps": [
+        "Study why prior MCP slow/incomplete",
+        "Extract skills/laws"
+      ],
+      "outputs": [
+        "gap analysis"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-003",
+      "name": "Industry method research ISTQB+SBTM+29119",
+      "phase": "meta-genesis",
+      "agents": [
+        "research-synthesist",
+        "test-results-analyzer"
+      ],
+      "tools": [],
+      "steps": [
+        "Map owner 10 steps \u2192 ISTQB CTFL 7"
+      ],
+      "outputs": [
+        "PROCESS lock"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-004",
+      "name": "Scaffold LIQA product E:/LIQA",
+      "phase": "meta-genesis",
+      "agents": [
+        "platform-engineer",
+        "mcp-builder"
+      ],
+      "tools": [],
+      "steps": [
+        "Create mcp/server.py FastMCP",
+        "Wire Cursor mcp.json"
+      ],
+      "outputs": [
+        "LIQA MCP"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-005",
+      "name": "Train agency overlays Perfect-100",
+      "phase": "meta-genesis",
+      "agents": [
+        "agents-orchestrator",
+        "learner"
+      ],
+      "tools": [
+        "liqa_agency_train_status"
+      ],
+      "steps": [
+        "scripts/train_agency_qa.py \u2192 279 overlays"
+      ],
+      "outputs": [
+        "packaging/industry/agency-qa-trained"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-006",
+      "name": "Lock Perfect-100 PF-59486",
+      "phase": "meta-genesis",
+      "agents": [
+        "reality-checker",
+        "evidence-collector"
+      ],
+      "tools": [
+        "liqa_learn_record"
+      ],
+      "steps": [
+        "Bake laws/persona v5",
+        "SPEED-PLAYBOOK"
+      ],
+      "outputs": [
+        "skills/PERFECT-100-PF-59486-GOLD.md"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-007",
+      "name": "Export Stable V1 entire chat to GitHub",
+      "phase": "meta-genesis",
+      "agents": [
+        "technical-writer",
+        "git-workflow-master"
+      ],
+      "tools": [],
+      "steps": [
+        "export_stable_v1_chat",
+        "redact secrets",
+        "tag stable-v1"
+      ],
+      "outputs": [
+        "artifacts/stable-v1",
+        "GitHub release"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-010",
+      "name": "Boot LIQA session",
+      "phase": "boot",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_boot",
+        "liqa_laws",
+        "liqa_engineer_persona",
+        "liqa_todo_list",
+        "liqa_company_status",
+        "liqa_product_status"
+      ],
+      "steps": [
+        "Load persona Perfect-100 v5",
+        "Show ISTQB todos"
+      ],
+      "outputs": [
+        "agents/flow-state.json"
+      ],
+      "gates": [
+        "persona loaded"
+      ]
+    },
+    {
+      "id": "MP-011",
+      "name": "Fresh KEY memory wipe",
+      "phase": "boot",
+      "agents": [
+        "orchestrator",
+        "intake"
+      ],
+      "tools": [
+        "liqa_fresh_task",
+        "liqa_self_assign"
+      ],
+      "steps": [
+        "Ignore prior KEY memory",
+        "Self-assign engineer"
+      ],
+      "outputs": [
+        "assignedTasks/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-012",
+      "name": "Learn speed tips before work",
+      "phase": "boot",
+      "agents": [
+        "learner"
+      ],
+      "tools": [
+        "liqa_learn_speed"
+      ],
+      "steps": [
+        "Read SPEED-PLAYBOOK tips"
+      ],
+      "outputs": [
+        "planning notes"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-013",
+      "name": "Flow chart materialize",
+      "phase": "boot",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_flow_chart"
+      ],
+      "steps": [
+        "Write agents/FLOW-CHART.md"
+      ],
+      "outputs": [
+        "FLOW-CHART.md"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-100",
+      "name": "Pull assigned Jira issues",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "Atlassian getJiraIssue/searchJiraIssuesUsingJql",
+        "liqa_save_assigned_task"
+      ],
+      "steps": [
+        "JQL assignee=currentUser",
+        "Plain English MD per KEY"
+      ],
+      "outputs": [
+        "assignedTasks/<KEY>/task.md"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-101",
+      "name": "Jira harvest checklist open",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "liqa_jira_harvest_checklist"
+      ],
+      "steps": [
+        "List mandatory harvest items"
+      ],
+      "outputs": [
+        "checklist"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-102",
+      "name": "Harvest KEY issue body",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "getJiraIssue",
+        "liqa_jira_harvest_record"
+      ],
+      "steps": [
+        "Summary AC description links"
+      ],
+      "outputs": [
+        "knowledgeBase/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-103",
+      "name": "Harvest Cloners links",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "getJiraIssue",
+        "liqa_jira_harvest_record"
+      ],
+      "steps": [
+        "Follow Cloners to source story"
+      ],
+      "outputs": [
+        "knowledgeBase/<KEY>/cloners/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-104",
+      "name": "Harvest Relates / Tests / is-tested-by",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "getJiraIssue",
+        "getIssueLinkTypes"
+      ],
+      "steps": [
+        "Map Test links + related bugs"
+      ],
+      "outputs": [
+        "knowledgeBase/<KEY>/links/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-105",
+      "name": "Harvest epic/feature/parent",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "getJiraIssue"
+      ],
+      "steps": [
+        "Pull PF-50130-style feature docs"
+      ],
+      "outputs": [
+        "knowledgeBase/<KEY>/epic/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-106",
+      "name": "Download ALL attachments PDF/PNG/msg",
+      "phase": "1-planning",
+      "agents": [
+        "intake",
+        "document-generator"
+      ],
+      "tools": [
+        "Atlassian attachments / download scripts"
+      ],
+      "steps": [
+        "Save every attachment binary"
+      ],
+      "outputs": [
+        "knowledgeBase/<KEY>/jira-attachments/"
+      ],
+      "gates": [
+        "attachments present OR noted empty"
+      ]
+    },
+    {
+      "id": "MP-107",
+      "name": "Extract PDF process text",
+      "phase": "1-planning",
+      "agents": [
+        "intake",
+        "technical-writer"
+      ],
+      "tools": [],
+      "steps": [
+        "OCR/PDF text \u2192 knowledgeBase"
+      ],
+      "outputs": [
+        "knowledgeBase/<KEY>/pdf-text.md"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-108",
+      "name": "Harvest status gate until complete",
+      "phase": "1-planning",
+      "agents": [
+        "intake",
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_jira_harvest_record",
+        "liqa_jira_harvest_status"
+      ],
+      "steps": [
+        "Loop until complete=true"
+      ],
+      "outputs": [
+        "harvest status JSON"
+      ],
+      "gates": [
+        "harvest.complete=true"
+      ]
+    },
+    {
+      "id": "MP-109",
+      "name": "Request 2\u20133 credentials",
+      "phase": "1-planning",
+      "agents": [
+        "intake"
+      ],
+      "tools": [
+        "liqa_request_credentials"
+      ],
+      "steps": [
+        "Ask maker/checker/vault paths"
+      ],
+      "outputs": [
+        "secrets request"
+      ],
+      "gates": [
+        "Ask mode"
+      ]
+    },
+    {
+      "id": "MP-110",
+      "name": "Credentials honesty check",
+      "phase": "1-planning",
+      "agents": [
+        "intake",
+        "reality-checker"
+      ],
+      "tools": [
+        "liqa_credentials_status"
+      ],
+      "steps": [
+        "After login: enough? blockers?"
+      ],
+      "outputs": [
+        "credentials status"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-111",
+      "name": "Agency mesh intake dispatch",
+      "phase": "1-planning",
+      "agents": [
+        "agents-orchestrator"
+      ],
+      "tools": [
+        "liqa_agency_dispatch",
+        "liqa_agency_list",
+        "liqa_agency_trained_prompt"
+      ],
+      "steps": [
+        "Dispatch intake specialists parallel"
+      ],
+      "outputs": [
+        "agents/mesh/*/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-112",
+      "name": "Announce planning done",
+      "phase": "1-planning",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_announce_planning_done",
+        "liqa_complete_phase"
+      ],
+      "steps": [
+        "Only if harvest.complete"
+      ],
+      "outputs": [
+        "phase1 done"
+      ],
+      "gates": [
+        "BLOCK if harvest incomplete"
+      ]
+    },
+    {
+      "id": "MP-113",
+      "name": "Heartbeat planning",
+      "phase": "1-planning",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_heartbeat"
+      ],
+      "steps": [
+        "Pulse after meaningful work"
+      ],
+      "outputs": [
+        "heartbeat log"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-200",
+      "name": "Continuous monitoring pulse",
+      "phase": "2-monitoring",
+      "agents": [
+        "orchestrator",
+        "senior-project-manager"
+      ],
+      "tools": [
+        "liqa_heartbeat",
+        "liqa_status",
+        "liqa_todo_list",
+        "liqa_company_status",
+        "liqa_mesh_status"
+      ],
+      "steps": [
+        "Track blockers",
+        "Never guess coords"
+      ],
+      "outputs": [
+        "reports/ live notes"
+      ],
+      "gates": [
+        "Ask if control missing"
+      ]
+    },
+    {
+      "id": "MP-201",
+      "name": "Stop the line on missing evidence",
+      "phase": "2-monitoring",
+      "agents": [
+        "reality-checker",
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_stop_the_line"
+      ],
+      "steps": [
+        "Block advance without proof"
+      ],
+      "outputs": [
+        "stop reason"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-202",
+      "name": "Evaluate all phases regression",
+      "phase": "2-monitoring",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_evaluate_all"
+      ],
+      "steps": [
+        "Prior phase regressions block advance"
+      ],
+      "outputs": [
+        "evaluate report"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-300",
+      "name": "Save user stories",
+      "phase": "3-analysis",
+      "agents": [
+        "intake",
+        "product-manager"
+      ],
+      "tools": [
+        "liqa_save_user_story"
+      ],
+      "steps": [
+        "Confluence/epic/story \u2192 MD"
+      ],
+      "outputs": [
+        "UserStories/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-301",
+      "name": "Clone existing Xray tests read-only",
+      "phase": "3-analysis",
+      "agents": [
+        "designer",
+        "intake"
+      ],
+      "tools": [
+        "liqa_save_existing_testcase",
+        "liqa_seed_format_refs"
+      ],
+      "steps": [
+        "is-tested-by clones",
+        "Never edit/delete"
+      ],
+      "outputs": [
+        "ExistingTestCases/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-302",
+      "name": "Harvest Jira writing tone",
+      "phase": "3-analysis",
+      "agents": [
+        "designer",
+        "technical-writer"
+      ],
+      "tools": [
+        "liqa_save_knowledge",
+        "liqa_seed_format_refs"
+      ],
+      "steps": [
+        "Study PF-59194/PF-55248/SSP golds"
+      ],
+      "outputs": [
+        "knowledgeBase/skills/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-303",
+      "name": "Gate: harvest complete before map",
+      "phase": "3-analysis",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_jira_harvest_status"
+      ],
+      "steps": [
+        "BLOCK map if incomplete"
+      ],
+      "outputs": [],
+      "gates": [
+        "harvest.complete"
+      ]
+    },
+    {
+      "id": "MP-304",
+      "name": "Open ONE headed browser entry URL once",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper",
+        "executor"
+      ],
+      "tools": [
+        "liqa_browser_open",
+        "liqa_device_status",
+        "liqa_list_windows",
+        "liqa_focus_window"
+      ],
+      "steps": [
+        "Entry URL once",
+        "Never close mid-session"
+      ],
+      "outputs": [
+        "agents/browser-entry.json"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-305",
+      "name": "Human Gate OTP/MFA if needed",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper"
+      ],
+      "tools": [
+        "liqa_human_gate",
+        "liqa_await_otp_field",
+        "liqa_ack_gate"
+      ],
+      "steps": [
+        "Never invent OTP"
+      ],
+      "outputs": [
+        "gate ack"
+      ],
+      "gates": [
+        "Ask mode"
+      ]
+    },
+    {
+      "id": "MP-306",
+      "name": "SBTM charter for exploratory map",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper"
+      ],
+      "tools": [
+        "liqa_sbtm_charter"
+      ],
+      "steps": [
+        "Time-box experience map"
+      ],
+      "outputs": [
+        "map charter"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-307",
+      "name": "Device Eyes\u2192Brain\u2192Hands loop (map)",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper",
+        "evidence-collector"
+      ],
+      "tools": [
+        "liqa_capture",
+        "liqa_click",
+        "liqa_click_text",
+        "liqa_move",
+        "liqa_type",
+        "liqa_hotkey",
+        "liqa_press",
+        "liqa_wait_frame",
+        "liqa_device_loop",
+        "liqa_recursive_step",
+        "liqa_calibrate_viewport",
+        "liqa_viewport_click"
+      ],
+      "steps": [
+        "Capture full desktop",
+        "Decide",
+        "Visible mouse",
+        "Wait frame"
+      ],
+      "outputs": [
+        "reports/proof/<KEY>/map/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-308",
+      "name": "Map every button/tab/dropdown",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper",
+        "workflow-architect"
+      ],
+      "tools": [
+        "liqa_save_map_node"
+      ],
+      "steps": [
+        "Click X \u2192 screen Y MD",
+        "NO Pass/Fail"
+      ],
+      "outputs": [
+        "map/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-309",
+      "name": "Living plan update after each screen",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper",
+        "senior-project-manager"
+      ],
+      "tools": [
+        "liqa_set_notes",
+        "liqa_heartbeat"
+      ],
+      "steps": [
+        "Update unvisited controls list"
+      ],
+      "outputs": [
+        "map living-plan"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-310",
+      "name": "Round-2 miss hunt (validation/empty/error)",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper",
+        "reality-checker"
+      ],
+      "tools": [
+        "liqa_capture",
+        "liqa_click"
+      ],
+      "steps": [
+        "Same browser",
+        "Document misses even if none"
+      ],
+      "outputs": [
+        "map/<KEY>/round-2/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-311",
+      "name": "FusionX nav recovery micro",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper",
+        "executor"
+      ],
+      "tools": [
+        "liqa_type",
+        "liqa_hotkey",
+        "liqa_capture"
+      ],
+      "steps": [
+        "AM tile miss \u2192 one address-bar deep URL",
+        "Blue-pixel Create New locate"
+      ],
+      "outputs": [
+        "proof recovery PNGs"
+      ],
+      "gates": [
+        "same session only"
+      ]
+    },
+    {
+      "id": "MP-312",
+      "name": "Minimize Excel before capture",
+      "phase": "3-analysis",
+      "agents": [
+        "mapper"
+      ],
+      "tools": [
+        "liqa_hotkey",
+        "liqa_focus_window"
+      ],
+      "steps": [
+        "Prevent Excel focus steal"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-313",
+      "name": "Complete analysis phase",
+      "phase": "3-analysis",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_complete_phase"
+      ],
+      "steps": [
+        "Map exists"
+      ],
+      "outputs": [
+        "phase3 done"
+      ],
+      "gates": [
+        "map artifacts exist"
+      ]
+    },
+    {
+      "id": "MP-400",
+      "name": "Sigiri laws load",
+      "phase": "4-design",
+      "agents": [
+        "designer"
+      ],
+      "tools": [
+        "liqa_sigiri_laws",
+        "liqa_xray_gold_steps",
+        "liqa_test_case_template"
+      ],
+      "steps": [
+        "Action|Data|Expected Result only"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-401",
+      "name": "Split story into path parts P00\u2026",
+      "phase": "4-design",
+      "agents": [
+        "designer"
+      ],
+      "tools": [
+        "liqa_xray_split_paths"
+      ],
+      "steps": [
+        "One path pack per flow"
+      ],
+      "outputs": [
+        "NewTestCases/<KEY>/sigiri-manual/Pxx/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-402",
+      "name": "Draft steps per path",
+      "phase": "4-design",
+      "agents": [
+        "designer",
+        "sachini_story_draft equiv"
+      ],
+      "tools": [
+        "liqa_xray_build_manual_test",
+        "liqa_save_new_testcase"
+      ],
+      "steps": [
+        "Sigiri-simple English",
+        "PF pipe titles"
+      ],
+      "outputs": [
+        "Pxx-steps.csv",
+        "manual test MD"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-403",
+      "name": "Validate steps guard",
+      "phase": "4-design",
+      "agents": [
+        "designer",
+        "reality-checker"
+      ],
+      "tools": [
+        "liqa_xray_validate_steps",
+        "liqa_xray_validate_title"
+      ],
+      "steps": [
+        "No decimal difference from Sigiri shape"
+      ],
+      "outputs": [],
+      "gates": [
+        "validate_steps pass"
+      ]
+    },
+    {
+      "id": "MP-404",
+      "name": "EP/BVA/decision-table/state design",
+      "phase": "4-design",
+      "agents": [
+        "designer",
+        "statistician"
+      ],
+      "tools": [],
+      "steps": [
+        "Cover empty/error/RBAC/maker-checker"
+      ],
+      "outputs": [
+        "NewTestCases design notes"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-405",
+      "name": "Sufficiency loop",
+      "phase": "4-design",
+      "agents": [
+        "designer",
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_testcase_sufficiency"
+      ],
+      "steps": [
+        "Show count + enough yes/no",
+        "Cycle until enough"
+      ],
+      "outputs": [
+        "sufficiency JSON"
+      ],
+      "gates": [
+        "enough=true"
+      ]
+    },
+    {
+      "id": "MP-406",
+      "name": "Agency designer dispatch parallel",
+      "phase": "4-design",
+      "agents": [
+        "agents-orchestrator"
+      ],
+      "tools": [
+        "liqa_agency_dispatch"
+      ],
+      "steps": [
+        "designer + technical-writer while mapper finishes"
+      ],
+      "outputs": [
+        "mesh assignments"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-407",
+      "name": "Complete design phase",
+      "phase": "4-design",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_complete_phase"
+      ],
+      "steps": [
+        "NEW cases only"
+      ],
+      "outputs": [
+        "phase4 done"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-500",
+      "name": "Create Jira Test issues NEW only",
+      "phase": "5-implementation",
+      "agents": [
+        "designer",
+        "intake"
+      ],
+      "tools": [
+        "createJiraIssue",
+        "createIssueLink"
+      ],
+      "steps": [
+        "Link tests \u2192 Story",
+        "ADD NEW only"
+      ],
+      "outputs": [
+        "jira-created.json"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-501",
+      "name": "Xray UI method doctrine",
+      "phase": "5-implementation",
+      "agents": [
+        "executor",
+        "designer"
+      ],
+      "tools": [
+        "liqa_xray_ui_method"
+      ],
+      "steps": [
+        "Import\u2192From csv\u2192#xray-csv-file\u2192Action*|Data|Expected Result"
+      ],
+      "outputs": [],
+      "gates": [
+        "never Attachments"
+      ]
+    },
+    {
+      "id": "MP-502",
+      "name": "Ensure Xray/Jira headed login",
+      "phase": "5-implementation",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_ui_ensure_login",
+        "liqa_human_gate"
+      ],
+      "steps": [
+        "Azure AD Human Gate if needed"
+      ],
+      "outputs": [
+        "login session"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-503",
+      "name": "UI RPA import CSV one test",
+      "phase": "5-implementation",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_ui_import_csv"
+      ],
+      "steps": [
+        "Playwright subprocess if asyncio",
+        "CDP 9333"
+      ],
+      "outputs": [
+        "import log"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-504",
+      "name": "UI RPA import pack P00\u2026",
+      "phase": "5-implementation",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_ui_import_pack"
+      ],
+      "steps": [
+        "force_reset if wrong steps"
+      ],
+      "outputs": [
+        "pack log"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-505",
+      "name": "UI RPA import registry all packs",
+      "phase": "5-implementation",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_ui_import_registry",
+        "liqa_xray_end_of_run_upload"
+      ],
+      "steps": [
+        "All jira-created packs"
+      ],
+      "outputs": [
+        "registry result"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-506",
+      "name": "Optional Xray API path only if Client Id/Secret",
+      "phase": "5-implementation",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_credentials_status",
+        "liqa_xray_set_credentials",
+        "liqa_xray_import_csv",
+        "liqa_xray_import_pack",
+        "liqa_xray_import_steps"
+      ],
+      "steps": [
+        "Fallback only"
+      ],
+      "outputs": [],
+      "gates": [
+        "prefer UI RPA"
+      ]
+    },
+    {
+      "id": "MP-507",
+      "name": "force_reset wrong steps micro",
+      "phase": "5-implementation",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_ui_import_csv"
+      ],
+      "steps": [
+        "Reset Current Test Steps label",
+        "Never Esc mid-dialog"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-508",
+      "name": "Book1 sample scaffold",
+      "phase": "5-implementation",
+      "agents": [
+        "book1_reporter"
+      ],
+      "tools": [
+        "liqa_book1_sample",
+        "liqa_list_outputs"
+      ],
+      "steps": [
+        "Create outputs/<STORY>/"
+      ],
+      "outputs": [
+        "Book1 xlsx scaffold"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-509",
+      "name": "Disk free check before SHARE embed",
+      "phase": "5-implementation",
+      "agents": [
+        "book1_reporter",
+        "infrastructure-maintainer"
+      ],
+      "tools": [],
+      "steps": [
+        "Require \u226550MB free on workspace drive"
+      ],
+      "outputs": [],
+      "gates": [
+        "disk gate"
+      ]
+    },
+    {
+      "id": "MP-510",
+      "name": "Complete implementation phase",
+      "phase": "5-implementation",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_complete_phase"
+      ],
+      "steps": [
+        "Tests linked + Book1 scaffold"
+      ],
+      "outputs": [
+        "phase5 done"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-600",
+      "name": "Role start executor",
+      "phase": "6-execution",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_role_start",
+        "liqa_role_dispatch"
+      ],
+      "steps": [
+        "Headed execute cases"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-601",
+      "name": "Eyes\u2192Brain\u2192Hands execute case step",
+      "phase": "6-execution",
+      "agents": [
+        "executor",
+        "evidence-collector"
+      ],
+      "tools": [
+        "liqa_capture",
+        "liqa_click",
+        "liqa_type",
+        "liqa_wait_frame",
+        "liqa_device_loop",
+        "liqa_proof_crop"
+      ],
+      "steps": [
+        "Proof PNG every frame change"
+      ],
+      "outputs": [
+        "reports/proof/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-602",
+      "name": "CDP Playwright SPA fill when available",
+      "phase": "6-execution",
+      "agents": [
+        "executor"
+      ],
+      "tools": [],
+      "steps": [
+        "Prefer CDP over raw pyautogui for FusionX forms"
+      ],
+      "outputs": [
+        "cdp session"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-603",
+      "name": "Maker\u2192checker same browser session",
+      "phase": "6-execution",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_type",
+        "liqa_human_gate"
+      ],
+      "steps": [
+        "Logout/login inside same window",
+        "Never new Chromium mid-flow"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-604",
+      "name": "Honesty start case",
+      "phase": "6-execution",
+      "agents": [
+        "honesty_referee"
+      ],
+      "tools": [
+        "liqa_honesty_start"
+      ],
+      "steps": [
+        "case_id + defect_class"
+      ],
+      "outputs": [
+        "honesty session"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-605",
+      "name": "Honesty attempt up to 20",
+      "phase": "6-execution",
+      "agents": [
+        "honesty_referee",
+        "executor"
+      ],
+      "tools": [
+        "liqa_honesty_attempt"
+      ],
+      "steps": [
+        "Distinct approaches + proof",
+        "found-a-way \u21d2 PASS"
+      ],
+      "outputs": [
+        "attempt log"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-606",
+      "name": "Obvious-class 3 headed repros",
+      "phase": "6-execution",
+      "agents": [
+        "honesty_referee"
+      ],
+      "tools": [
+        "liqa_honesty_attempt",
+        "liqa_honesty_verdict"
+      ],
+      "steps": [
+        "http_5xx / blank_shell need 3 repros"
+      ],
+      "outputs": [
+        "proof trio"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-607",
+      "name": "Honesty verdict",
+      "phase": "6-execution",
+      "agents": [
+        "honesty_referee",
+        "reality-checker"
+      ],
+      "tools": [
+        "liqa_honesty_verdict"
+      ],
+      "steps": [
+        "PASS | REAL_BUG | BLOCKED"
+      ],
+      "outputs": [
+        "verdict"
+      ],
+      "gates": [
+        "no REAL_BUG without process"
+      ]
+    },
+    {
+      "id": "MP-608",
+      "name": "Bug draft local",
+      "phase": "6-execution",
+      "agents": [
+        "executor",
+        "evidence-collector"
+      ],
+      "tools": [
+        "liqa_file_bug_draft",
+        "liqa_proof_crop"
+      ],
+      "steps": [
+        "Crop + red highlight"
+      ],
+      "outputs": [
+        "bugs/<KEY>/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-609",
+      "name": "Bug JQL dedupe before create",
+      "phase": "6-execution",
+      "agents": [
+        "executor",
+        "reality-checker"
+      ],
+      "tools": [
+        "searchJiraIssuesUsingJql"
+      ],
+      "steps": [
+        "Same symptom/account/trace",
+        "If twin open \u2192 Relates + comment"
+      ],
+      "outputs": [],
+      "gates": [
+        "dedupe gate"
+      ]
+    },
+    {
+      "id": "MP-610",
+      "name": "Create Jira Bug + attach proof",
+      "phase": "6-execution",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "createJiraIssue",
+        "createIssueLink",
+        "addCommentToJiraIssue"
+      ],
+      "steps": [
+        "Attach PNG",
+        "Match harvested tone"
+      ],
+      "outputs": [
+        "Bug KEY"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-611",
+      "name": "Book1 append row with embedded PNG",
+      "phase": "6-execution",
+      "agents": [
+        "book1_reporter"
+      ],
+      "tools": [
+        "liqa_book1_append_row"
+      ],
+      "steps": [
+        "Full English all columns"
+      ],
+      "outputs": [
+        "Book1 row"
+      ],
+      "gates": [
+        "SHARE min chars"
+      ]
+    },
+    {
+      "id": "MP-612",
+      "name": "Revalidate cycle optional",
+      "phase": "6-execution",
+      "agents": [
+        "honesty_referee"
+      ],
+      "tools": [
+        "liqa_revalidate_cycle"
+      ],
+      "steps": [
+        "CONFIRMED|NOT_REPRO|PARTIAL"
+      ],
+      "outputs": [
+        "revalidate report"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-613",
+      "name": "Agency evidence/reality dispatch",
+      "phase": "6-execution",
+      "agents": [
+        "agents-orchestrator",
+        "evidence-collector",
+        "reality-checker"
+      ],
+      "tools": [
+        "liqa_agency_dispatch"
+      ],
+      "steps": [
+        "Parallel evidence review"
+      ],
+      "outputs": [
+        "mesh latest.json"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-614",
+      "name": "Complete execution phase",
+      "phase": "6-execution",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_complete_phase"
+      ],
+      "steps": [
+        "Proofs + honesty done"
+      ],
+      "outputs": [
+        "phase6 done"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-700",
+      "name": "Book1 validate SHARE gold",
+      "phase": "7-completion",
+      "agents": [
+        "book1_reporter",
+        "reality-checker"
+      ],
+      "tools": [
+        "liqa_book1_validate"
+      ],
+      "steps": [
+        "\u2265110 rows",
+        "image_coverage=100%",
+        "gold_parity_ok"
+      ],
+      "outputs": [
+        "validate report"
+      ],
+      "gates": [
+        "BLOCK share on fail"
+      ]
+    },
+    {
+      "id": "MP-701",
+      "name": "Honesty triple cycle close",
+      "phase": "7-completion",
+      "agents": [
+        "honesty_referee"
+      ],
+      "tools": [
+        "liqa_honesty_verdict"
+      ],
+      "steps": [
+        "3 full honesty clarifications"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-702",
+      "name": "End-of-run Xray upload all packs",
+      "phase": "7-completion",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "liqa_xray_end_of_run_upload",
+        "liqa_xray_upload_after_run"
+      ],
+      "steps": [
+        "Subprocess Playwright"
+      ],
+      "outputs": [
+        "upload registry"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-703",
+      "name": "Learn cycle + record",
+      "phase": "7-completion",
+      "agents": [
+        "learner"
+      ],
+      "tools": [
+        "liqa_learn_cycle",
+        "liqa_learn_record",
+        "liqa_learn_speed",
+        "liqa_list_skills"
+      ],
+      "steps": [
+        "Update SPEED-PLAYBOOK",
+        "skills"
+      ],
+      "outputs": [
+        "learner/speed-log.jsonl"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-704",
+      "name": "Story Perfect-100 closeout comment",
+      "phase": "7-completion",
+      "agents": [
+        "orchestrator",
+        "technical-writer"
+      ],
+      "tools": [
+        "addCommentToJiraIssue"
+      ],
+      "steps": [
+        "Paths + bug keys + Book1 path"
+      ],
+      "outputs": [
+        "Jira comment"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-705",
+      "name": "Dedupe Relates twins finalize",
+      "phase": "7-completion",
+      "agents": [
+        "executor"
+      ],
+      "tools": [
+        "createIssueLink",
+        "addCommentToJiraIssue"
+      ],
+      "steps": [
+        "Oldest open bug wins"
+      ],
+      "outputs": [],
+      "gates": []
+    },
+    {
+      "id": "MP-706",
+      "name": "Evaluate all + complete phase 7",
+      "phase": "7-completion",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [
+        "liqa_evaluate_all",
+        "liqa_complete_phase"
+      ],
+      "steps": [
+        "Exit criteria"
+      ],
+      "outputs": [
+        "phase7 done"
+      ],
+      "gates": [
+        "all ISTQB done"
+      ]
+    },
+    {
+      "id": "MP-707",
+      "name": "Optional Perfect-100 agency retrain",
+      "phase": "7-completion",
+      "agents": [
+        "agents-orchestrator",
+        "learner"
+      ],
+      "tools": [
+        "liqa_agency_train_status"
+      ],
+      "steps": [
+        "train_agency_qa.py if doctrine changed"
+      ],
+      "outputs": [
+        "279 overlays"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-800",
+      "name": "Device atomic: Capture full desktop PNG",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_capture"
+      ],
+      "steps": [
+        "mss/full monitor",
+        "optional OCR"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-801",
+      "name": "Device atomic: List/focus window",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_list_windows",
+        "liqa_focus_window"
+      ],
+      "steps": [
+        "Title substr match"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-802",
+      "name": "Device atomic: Move mouse visible",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_move"
+      ],
+      "steps": [
+        "Bezier-style path when available"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-803",
+      "name": "Device atomic: Click coordinates",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_click"
+      ],
+      "steps": [
+        "button/clicks"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-804",
+      "name": "Device atomic: Click by visible text",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_click_text"
+      ],
+      "steps": [
+        "OCR/text locate"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-805",
+      "name": "Device atomic: Type with delay",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_type"
+      ],
+      "steps": [
+        "interval",
+        "optional Enter"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-806",
+      "name": "Device atomic: Hotkey / chord / press",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_hotkey",
+        "liqa_hotkey_chord",
+        "liqa_press"
+      ],
+      "steps": [
+        "Ctrl combos"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-807",
+      "name": "Device atomic: Wait frame change",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_wait_frame"
+      ],
+      "steps": [
+        "timeout"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-808",
+      "name": "Device atomic: Calibrate viewport",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_calibrate_viewport",
+        "liqa_viewport_click"
+      ],
+      "steps": [
+        "Browser content coords"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-809",
+      "name": "Device atomic: Recursive observe-act",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_recursive_step",
+        "liqa_device_loop"
+      ],
+      "steps": [
+        "intent tagged loop"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-810",
+      "name": "Device atomic: List monitors",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_list_monitors"
+      ],
+      "steps": [
+        "multi-monitor"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-811",
+      "name": "Device atomic: Proof crop red box",
+      "phase": "device-atomic",
+      "agents": [
+        "executor",
+        "mapper"
+      ],
+      "tools": [
+        "liqa_proof_crop"
+      ],
+      "steps": [
+        "exact defect region"
+      ],
+      "outputs": [
+        "proof/device"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-900",
+      "name": "Agency track dispatch: orchestrator",
+      "phase": "agency-mesh",
+      "agents": [
+        "agents-orchestrator",
+        "chief-of-staff",
+        "senior-project-manager",
+        "project-shepherd",
+        "workflow-architect"
+      ],
+      "tools": [
+        "liqa_agency_dispatch",
+        "liqa_agency_trained_prompt",
+        "liqa_mesh_status"
+      ],
+      "steps": [
+        "Load Perfect-100 overlay for each specialist in orchestrator",
+        "Return evidence paths + verdict only"
+      ],
+      "outputs": [
+        "agents/mesh/<id>/"
+      ],
+      "gates": [
+        "qa_trained overlay"
+      ]
+    },
+    {
+      "id": "MP-910",
+      "name": "Agency track dispatch: execution",
+      "phase": "agency-mesh",
+      "agents": [
+        "evidence-collector",
+        "reality-checker",
+        "test-results-analyzer",
+        "performance-benchmarker",
+        "api-tester"
+      ],
+      "tools": [
+        "liqa_agency_dispatch",
+        "liqa_agency_trained_prompt",
+        "liqa_mesh_status"
+      ],
+      "steps": [
+        "Load Perfect-100 overlay for each specialist in execution",
+        "Return evidence paths + verdict only"
+      ],
+      "outputs": [
+        "agents/mesh/<id>/"
+      ],
+      "gates": [
+        "qa_trained overlay"
+      ]
+    },
+    {
+      "id": "MP-920",
+      "name": "Agency track dispatch: design",
+      "phase": "agency-mesh",
+      "agents": [
+        "ui-designer",
+        "ux-researcher",
+        "ux-architect",
+        "whimsy-injector",
+        "brand-guardian"
+      ],
+      "tools": [
+        "liqa_agency_dispatch",
+        "liqa_agency_trained_prompt",
+        "liqa_mesh_status"
+      ],
+      "steps": [
+        "Load Perfect-100 overlay for each specialist in design",
+        "Return evidence paths + verdict only"
+      ],
+      "outputs": [
+        "agents/mesh/<id>/"
+      ],
+      "gates": [
+        "qa_trained overlay"
+      ]
+    },
+    {
+      "id": "MP-930",
+      "name": "Agency track dispatch: docs",
+      "phase": "agency-mesh",
+      "agents": [
+        "technical-writer",
+        "document-generator",
+        "executive-summary-generator",
+        "meeting-notes-specialist",
+        "content-creator",
+        "prompt-engineer"
+      ],
+      "tools": [
+        "liqa_agency_dispatch",
+        "liqa_agency_trained_prompt",
+        "liqa_mesh_status"
+      ],
+      "steps": [
+        "Load Perfect-100 overlay for each specialist in docs",
+        "Return evidence paths + verdict only"
+      ],
+      "outputs": [
+        "agents/mesh/<id>/"
+      ],
+      "gates": [
+        "qa_trained overlay"
+      ]
+    },
+    {
+      "id": "MP-990",
+      "name": "Agency full roster available",
+      "phase": "agency-mesh",
+      "agents": [
+        "agents-orchestrator"
+      ],
+      "tools": [
+        "liqa_agency_list"
+      ],
+      "steps": [
+        "279 Perfect-100 trained specialists"
+      ],
+      "outputs": [
+        "agency-qa-trained-index.json"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-991",
+      "name": "Industry 2QA human gate ops",
+      "phase": "ops-2qa",
+      "agents": [
+        "orchestrator"
+      ],
+      "tools": [],
+      "steps": [
+        "2 QA humans only for gates/sign-off",
+        "Workers execute headed"
+      ],
+      "outputs": [
+        "control / worker APIs"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-A00",
+      "name": "Export full chat Stable V1",
+      "phase": "stable-export",
+      "agents": [
+        "technical-writer"
+      ],
+      "tools": [],
+      "steps": [
+        "export_stable_v1_chat.py",
+        "FULL-CHAT.md + raw jsonl"
+      ],
+      "outputs": [
+        "artifacts/stable-v1/chat/"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-A01",
+      "name": "Redact secrets in export",
+      "phase": "stable-export",
+      "agents": [
+        "senior-secops-engineer"
+      ],
+      "tools": [],
+      "steps": [
+        "redact_stable_v1_chat.py"
+      ],
+      "outputs": [
+        "redacted chat"
+      ],
+      "gates": [
+        "no plaintext passwords"
+      ]
+    },
+    {
+      "id": "MP-A02",
+      "name": "Push GitHub tag release",
+      "phase": "stable-export",
+      "agents": [
+        "git-workflow-master",
+        "devops-automator"
+      ],
+      "tools": [],
+      "steps": [
+        "commit",
+        "tag stable-v1",
+        "release v1.0.0-stable"
+      ],
+      "outputs": [
+        "GitHub"
+      ],
+      "gates": []
+    },
+    {
+      "id": "MP-A03",
+      "name": "Publish micro-process map",
+      "phase": "stable-export",
+      "agents": [
+        "workflow-architect",
+        "technical-writer"
+      ],
+      "tools": [],
+      "steps": [
+        "This process-map pack"
+      ],
+      "outputs": [
+        "artifacts/stable-v1/process-map/"
+      ],
+      "gates": []
+    }
+  ],
+  "in_process_roles": [
+    "orchestrator",
+    "intake",
+    "mapper",
+    "designer",
+    "executor",
+    "honesty_referee",
+    "book1_reporter",
+    "learner"
+  ],
+  "book1_columns": [
+    "Area",
+    "Issue",
+    "Screenshot",
+    "What is testing",
+    "Why that failed your prediction",
+    "2nd QA confirmation",
+    "Simple explanation"
+  ]
+}

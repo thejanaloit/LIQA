@@ -12,6 +12,12 @@ If anyone asks for the **LIQA full stable v1 version chat**, give them this fold
 | Perfect-100 doctrine | [`../../skills/PERFECT-100-PF-59486-GOLD.md`](../../skills/PERFECT-100-PF-59486-GOLD.md) |
 | Perfect-100 artifact | [`../perfect-100-pf59486/`](../perfect-100-pf59486/) |
 
+## Complete process map (every micro-process)
+
+**→ [`process-map/`](process-map/)** — agents, ISTQB 1→7 micros, device loop, Xray UI RPA, honesty, Book1, Perfect-100 lock, Stable export  
+**→ [`process-map/MICROPROCESSES.json`](process-map/MICROPROCESSES.json)** — MP-xxx machine catalog  
+**→ [`docs/PROCESS-MAP-COMPLETE.md`](../../docs/PROCESS-MAP-COMPLETE.md)**
+
 ## Locked versions
 
 - **MCP:** `2026-09-16-liqa-perfect-100-v5`
