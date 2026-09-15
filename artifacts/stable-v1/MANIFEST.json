@@ -1,0 +1,26 @@
+{
+  "product": "LIQA",
+  "label": "Full Stable V1",
+  "chat_id": "eba41c65-a769-4c5e-a6ab-b2c6c59ae740",
+  "exported_utc": "2026-09-15T20:02:08.428034+00:00",
+  "raw_jsonl": "chat/FULL-CHAT.raw.jsonl",
+  "full_markdown": "chat/FULL-CHAT.md",
+  "user_turns_only": "chat/USER-TURNS-ONLY.md",
+  "parts_dir": "chat/parts/",
+  "part_count": 4,
+  "stats": {
+    "raw_bytes": 10185247,
+    "md_bytes": 5701222,
+    "jsonl_lines": 2793,
+    "user_turns": 248,
+    "assistant_turns": 555
+  },
+  "sha256_raw_jsonl": "ebc6f9bc2fc136fe2ceeca0b4f87280371a72f8d16e81c3773c1476b10406524",
+  "perfect100_ref": "PF-59486",
+  "mcp_version": "2026-09-16-liqa-perfect-100-v5",
+  "agency_train_version": "2026-09-16-qa-trained-perfect-100-v2",
+  "agency_train_count": 279,
+  "doctrine": "skills/PERFECT-100-PF-59486-GOLD.md",
+  "github_answer": "Give artifacts/stable-v1/chat/FULL-CHAT.md (entire chat) + artifacts/stable-v1/README.md",
+  "redacted": true
+}

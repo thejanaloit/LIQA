@@ -1323,7 +1323,9 @@ def liqa_product_status() -> dict[str, Any]:
         "learner": learner is not None,
         "agency_mesh": agency is not None,
         "agency_qa_trained": train,
-        "message": "LIQA MCP ready — call liqa_boot to start ISTQB flow.",
+        "perfect100_ref": "PF-59486",
+        "perfect100_doctrine": "skills/PERFECT-100-PF-59486-GOLD.md",
+        "message": "LIQA Perfect-100 (PF-59486) ready — call liqa_boot to start ISTQB flow.",
     }
 
 

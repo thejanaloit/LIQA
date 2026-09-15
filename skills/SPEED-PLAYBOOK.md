@@ -1,6 +1,18 @@
 # LIQA Speed Playbook
 
-Learned shortcuts from real headed QA rounds (PF-55248 / PF-59194).
+Learned shortcuts from real headed QA rounds.  
+**Perfect-100 bar:** PF-59486 (`skills/PERFECT-100-PF-59486-GOLD.md`) · MCP `2026-09-16-liqa-perfect-100-v5`
+
+## Perfect-100 — PF-59486 (2026-09-16)
+
+- WORKED (PF-59486): Full ISTQB 1→7 clone of PF-55248; harvest→map→Sigiri P00–P06→UI RPA→headed execute→Book1 SHARE 110/110 gold_parity_ok.
+- WORKED (PF-59486): Honesty obvious-3 for `http_5xx` (Select 0042250036 ISE) and `blank_shell` (receipt-reallocation).
+- WORKED (PF-59486): Create New located via blue-pixel cluster (~right content edge); AM tile miss → one address-bar deep URL recovery same session.
+- WORKED (PF-59486): Book1 SHARE builder `_build_book1_share.py` with thumbs + validate_book1_workbook.
+- AVOID (PF-59486): Filing duplicate Bugs when PF-59463/PF-59465 already open — dedupe Relates first.
+- AVOID (PF-59486): Playwright Sync import inside MCP asyncio — use subprocess.
+- AVOID (PF-59486): Building 110-row Book1 when E: has <50MB free.
+- TECHNIQUE: Agency mesh intake+designer while mapper headed; learn_cycle at close; Story comment with bug+Book1 paths.
 
 ## Seed — PF-55248 / PF-59194
 
@@ -86,3 +98,12 @@ Learned shortcuts from real headed QA rounds (PF-55248 / PF-59194).
 - WORKED (PF-58374): Completed learn_cycle; refresh SPEED-PLAYBOOK before next task.
 - TECHNIQUE (PF-58374): liqa_learn_speed before nav
 - TECHNIQUE (PF-58374): liqa_agency_dispatch for parallel intake
+
+## Round 2026-09-15 17:19 UTC
+- WORKED (PF-59486): Completed learn_cycle; refresh SPEED-PLAYBOOK before next task.
+- TECHNIQUE (PF-59486): liqa_learn_speed before nav
+- TECHNIQUE (PF-59486): liqa_agency_dispatch for parallel intake
+
+## Round 2026-09-15 19:52 UTC
+- WORKED (PF-59486): End-to-end ISTQB 1-7 + Book1 SHARE 110/110 + Sigiri UI RPA + honesty obvious-3 became owner Perfect-100 bar and was baked into MCP+agency training.
+- AVOID (PF-59486): Duplicate bug filing vs PF-59463/65; Sync Playwright in asyncio; E: disk near full during Book1.

@@ -1,10 +1,13 @@
 # LIQA Quality Contract — SAME LEVEL for every developer
 
-**Locked reference run:** PF-55248 Book1 SHARE (`PF-55248-Book1-SHARE.xlsx`)  
-**Also gold:** PF-58374-Book1-SHARE · PF-59194 headed process  
+**Perfect-100 locked run:** [PF-59486](https://lolcgroupdev.atlassian.net/browse/PF-59486) (`PF-59486-Book1-SHARE.xlsx`)  
+**Also gold:** PF-55248 Book1 SHARE · PF-58374-Book1-SHARE · PF-59194 Sigiri Manual steps  
+
+Doctrine: `skills/PERFECT-100-PF-59486-GOLD.md` · MCP version `2026-09-16-liqa-perfect-100-v5`
 
 Any developer / machine that ships LIQA work MUST match this bar.  
 “Almost the same” is a fail.
+
 
 ---
 

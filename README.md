@@ -2,11 +2,24 @@
 
 **Product:** one Cursor MCP that clones a human Manual QA engineer end-to-end.
 
+## Full Stable V1 (final)
+
+If somebody asks for the **LIQA full stable v1 version chat**, give:
+
+**→ [`artifacts/stable-v1/`](artifacts/stable-v1/)** — entire chat + Perfect-100 lock  
+**→ [`artifacts/stable-v1/chat/FULL-CHAT.md`](artifacts/stable-v1/chat/FULL-CHAT.md)** — full readable chat  
+**→ [`artifacts/stable-v1/chat/FULL-CHAT.raw.jsonl`](artifacts/stable-v1/chat/FULL-CHAT.raw.jsonl)** — raw transcript  
+**→ Tag:** `stable-v1` on this repo
+
+See **[docs/STABLE-V1.md](docs/STABLE-V1.md)**.
+
 **Sigiri Manual steps (locked):** upload Xray steps with headed UI RPA — **no Xray API keys**. See **[docs/XRAY-UI-RPA.md](docs/XRAY-UI-RPA.md)** · MCP `liqa_xray_ui_method` · gold PF-59194.
 
 ## Give to other developers (same level)
 
-Other developers must hit the **same smoothness and Book1 quality** as PF-55248 SHARE — not a weaker fork.
+Other developers must hit the **same smoothness and Book1 quality** as **Perfect-100 PF-59486** (and PF-55248 SHARE) — not a weaker fork.
+
+Doctrine: **[skills/PERFECT-100-PF-59486-GOLD.md](skills/PERFECT-100-PF-59486-GOLD.md)** · MCP `2026-09-16-liqa-perfect-100-v5` · Agency train `2026-09-16-qa-trained-perfect-100-v2`
 
 1. Read **[docs/QUALITY-CONTRACT.md](docs/QUALITY-CONTRACT.md)** (non-negotiable bar)
 2. Follow **[docs/DEVELOPER-HANDOVER.md](docs/DEVELOPER-HANDOVER.md)**
