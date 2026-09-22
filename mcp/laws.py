@@ -10,7 +10,7 @@ from engineer_persona import (
     YOUTUBE_ANALOGY,
 )
 
-VERSION = "2026-09-16-liqa-perfect-100-v5"
+VERSION = "2026-09-22-liqa-perfect-100-v6"
 PROCESS = "ISTQB CTFL Fundamental Test Process + ISO/IEC/IEEE 29119-2 dynamic testing + SBTM"
 
 ISTQB_PHASES = [
@@ -96,7 +96,8 @@ ISTQB_PHASES = [
             "Headed Eyes→Brain→Hands on this device (Teams remote-control style).",
             "Behave as a human. Try every honest way. After 20 distinct failed approaches with proof → REAL_BUG.",
             "Without that process you may not label bug or good.",
-            "Bugs: crop to the exact point, red highlight, attach PNG to Jira. Match harvested tone.",
+            "Bugs: crop to the exact point, red highlight, attach PNG to Jira Attachments (liqa_attach_bug_proofs). Description filename lists alone are incomplete.",
+            "Before phase 7: copy cropped proofs into outputs/<STORY>/jira-attach-pack-<BUG_KEY>/ so end-of-run Attach RPA can upload them.",
             "Before filing: JQL-dedupe same symptom; Relates oldest open bug if twin exists (Perfect-100).",
         ],
         "folders": ["reports", "outputs", "bugs"],
@@ -111,10 +112,11 @@ ISTQB_PHASES = [
             "Re-clarify honesty 3 cycles.",
             "liqa_learn_cycle + liqa_learn_speed: update skills and SPEED-PLAYBOOK.",
             "Auto: liqa_complete_phase(7) / liqa_learn_cycle call liqa_xray_end_of_run_upload (headed UI RPA for all packs in jira-created.json) via subprocess if asyncio.",
+            "Auto LAST: liqa_attach_end_of_run / liqa_attach_bug_proofs — headed UI RPA puts cropped PNGs into the Jira **Attachments** panel for every outputs/<STORY>/jira-attach-pack-<BUG_KEY>/. Filenames in the description alone are NOT proof.",
             "Evaluators must pass Book1 SHARE guards before share (Perfect-100 = PF-59486 bar).",
-            "Dedupe bugs: Relates twins to oldest open; attach proof PNGs.",
-            "Close only when Book1 + Jira bugs (if any) + honesty + Manual steps upload are complete.",
-            "Comment Perfect-100 closeout on Story KEY (paths + bug keys + Book1 path).",
+            "Dedupe bugs: Relates twins to oldest open; attach proof PNGs (Attachments panel must show thumbnails).",
+            "Close only when Book1 + Jira bugs (if any) + honesty + Manual steps upload + Attachments RPA are complete.",
+            "Comment Perfect-100 closeout on Story KEY (paths + bug keys + Book1 path + attachment count).",
         ],
         "folders": ["reports"],
         "ask_ok": False,
@@ -140,6 +142,9 @@ flowchart TD
   HON -->|REAL_BUG| BUG[bugs/ draft → Atlassian MCP]
   BUG --> COMP
   COMP --> LEARN[liqa_learn_cycle]
+  LEARN --> XRAY[Xray UI RPA end-of-run]
+  XRAY --> ATTACH[Bug proof Attachments RPA]
+  ATTACH --> DONE[Close + Story comment]
   subgraph roles [In-process roles]
     INT[intake]
     MAP[mapper]
@@ -220,6 +225,7 @@ On a new owner task: liqa_fresh_task then liqa_self_assign — ignore prior memo
 Use Atlassian MCP for Jira/Confluence. Use liqa_file_bug_draft for local bug drafts.
 Headed: liqa_capture / liqa_click / liqa_type / liqa_hotkey / liqa_browser_open (once).
 Gold: Perfect-100 PF-59486 + Sigiri PF-59194 / PF-55248 / SSP-38278 / SSP-42118. Book1 SHARE. Honesty + bug dedupe.
+End-of-run: liqa_xray_end_of_run_upload THEN liqa_attach_end_of_run (bug PNGs → Jira Attachments panel).
 Roles: orchestrator|intake|mapper|designer|executor|honesty_referee|book1_reporter|learner.
 Agency: liqa_agency_list / liqa_agency_dispatch (250+ specialists).
 Learner: liqa_learn_speed / liqa_learn_cycle.

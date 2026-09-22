@@ -147,6 +147,11 @@ except ImportError:
     xray_ui = None  # type: ignore
 
 try:
+    import jira_attach_proofs as jira_attach
+except ImportError:
+    jira_attach = None  # type: ignore
+
+try:
     import lolc_pack as lolc
 except ImportError:
     lolc = None  # type: ignore
@@ -233,14 +238,22 @@ def liqa_flow_chart() -> dict[str, Any]:
 def liqa_complete_phase(phase_id: int, notes: str = "") -> dict[str, Any]:
     """Mark an ISTQB phase done (1..7). Prior phases must already be done.
 
-    Phase 7 complete auto-runs Sigiri Xray UI RPA upload (no Xray API keys).
+    Phase 7 complete auto-runs:
+    1) Sigiri Xray UI RPA upload (no Xray API keys)
+    2) Bug-proof Jira Attachments RPA (liqa_attach_bug_proofs end-of-run)
     """
     out = flow.complete_phase(phase_id, notes)
-    if out.get("ok") and int(phase_id) == 7 and xray_ui is not None:
-        try:
-            out["xray_end_of_run_upload"] = xray_ui.end_of_run_upload_registry(headed=True)
-        except Exception as e:  # noqa: BLE001
-            out["xray_end_of_run_upload"] = {"ok": False, "error": str(e)}
+    if out.get("ok") and int(phase_id) == 7:
+        if xray_ui is not None:
+            try:
+                out["xray_end_of_run_upload"] = xray_ui.end_of_run_upload_registry(headed=True)
+            except Exception as e:  # noqa: BLE001
+                out["xray_end_of_run_upload"] = {"ok": False, "error": str(e)}
+        if jira_attach is not None:
+            try:
+                out["bug_proof_attach"] = jira_attach.end_of_run_attach_proofs(headed=True)
+            except Exception as e:  # noqa: BLE001
+                out["bug_proof_attach"] = {"ok": False, "error": str(e)}
     return out
 
 
@@ -668,7 +681,9 @@ def liqa_human_gate(kind: str = "other", prompt: str = "Human action required", 
 def liqa_learn_cycle(notes: str = "", task_key: str = "") -> dict[str, Any]:
     """ISTQB completion learn cycle + speed playbook uplift.
 
-    Also runs end-of-run Xray UI RPA upload for every pack in jira-created.json.
+    Also runs end-of-run:
+    1) Xray UI RPA upload for every pack in jira-created.json
+    2) Bug-proof Attachments RPA for every outputs/*/jira-attach-pack-*
     """
     base: dict[str, Any] = {"ok": True, "notes": notes}
     if extras is not None and hasattr(extras, "learn_cycle"):
@@ -690,6 +705,13 @@ def liqa_learn_cycle(notes: str = "", task_key: str = "") -> dict[str, Any]:
             base["xray_end_of_run_upload"] = xray_ui.end_of_run_upload_registry(headed=True)
         except Exception as e:  # noqa: BLE001
             base["xray_end_of_run_upload"] = {"ok": False, "error": str(e)}
+    if jira_attach is not None:
+        try:
+            base["bug_proof_attach"] = jira_attach.end_of_run_attach_proofs(
+                story_key=task_key or "", headed=True
+            )
+        except Exception as e:  # noqa: BLE001
+            base["bug_proof_attach"] = {"ok": False, "error": str(e)}
     return base
 
 
@@ -1100,6 +1122,58 @@ def liqa_xray_end_of_run_upload(registry_json_path: str = "", headed: bool = Tru
     if xray_ui is None:
         return {"ok": False, "error": "xray_ui_import module unavailable"}
     return xray_ui.end_of_run_upload_registry(registry_json_path, headed=bool(headed))
+
+
+@mcp.tool()
+def liqa_attach_method() -> dict[str, Any]:
+    """Return the locked Jira bug-proof Attachments RPA contract (filenames in description ≠ proof)."""
+    if jira_attach is None:
+        return {"ok": False, "error": "jira_attach_proofs module unavailable"}
+    return jira_attach.proven_method()
+
+
+@mcp.tool()
+def liqa_attach_bug_proofs(
+    issue_key: str = "",
+    file_paths: str = "",
+    story_key: str = "",
+    headed: bool = True,
+    skip_existing: bool = True,
+) -> dict[str, Any]:
+    """Attach cropped proof PNGs to Jira bug(s) via headed UI RPA (Attachments panel).
+
+    - issue_key + file_paths (comma-separated): attach those files to one bug
+    - story_key alone / empty: discover outputs/<STORY>/jira-attach-pack-<BUG>/*.png
+    Auto-runs on phase 7 / learn_cycle. Idempotent: skips filenames already attached.
+    """
+    if jira_attach is None:
+        return {"ok": False, "error": "jira_attach_proofs module unavailable"}
+    key = (issue_key or "").strip().upper()
+    paths = [p.strip() for p in (file_paths or "").split(",") if p.strip()]
+    if key and paths:
+        return jira_attach.attach_files_to_issue(
+            key, paths, headed=bool(headed), skip_existing=bool(skip_existing)
+        )
+    jobs = jira_attach.discover_attach_jobs(story_key=story_key or "")
+    if key and not paths:
+        jobs = [j for j in jobs if j.get("issue") == key]
+        if not jobs:
+            return {
+                "ok": False,
+                "error": f"no pack for {key}",
+                "hint": f"Create outputs/<STORY>/jira-attach-pack-{key}/*.png",
+            }
+    return jira_attach.attach_jobs(
+        jobs, headed=bool(headed), skip_existing=bool(skip_existing)
+    )
+
+
+@mcp.tool()
+def liqa_attach_end_of_run(story_key: str = "", headed: bool = True) -> dict[str, Any]:
+    """End-of-run: attach every discovered jira-attach-pack-* to its bug KEY (auto on phase 7 / learn)."""
+    if jira_attach is None:
+        return {"ok": False, "error": "jira_attach_proofs module unavailable"}
+    return jira_attach.end_of_run_attach_proofs(story_key=story_key or "", headed=bool(headed))
 
 
 @mcp.tool()

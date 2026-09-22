@@ -1,9 +1,10 @@
 # PERFECT-100 GOLD — PF-59486 (owner-locked LIQA bar)
 
-**Version:** `2026-09-16-liqa-perfect-100-v5`  
+**Version:** `2026-09-22-liqa-perfect-100-v6`  
 **Reference run:** [PF-59486](https://lolcgroupdev.atlassian.net/browse/PF-59486) (clone of [PF-55248](https://lolcgroupdev.atlassian.net/browse/PF-55248))  
 **Format gold:** [PF-59194](https://lolcgroupdev.atlassian.net/browse/PF-59194) Sigiri Manual steps  
 **Book1 SHARE:** `workspace/default-run/outputs/PF-59486/PF-59486-Book1-SHARE.xlsx` (110 rows · 100% images · gold_parity_ok)
+**Attach RPA:** `mcp/jira_attach_proofs.py` — bug proofs must appear under Jira Attachments (PF-59783 lesson)
 
 Owner lock: **this end-to-end Manual QA level is the Perfect-100 bar for LIQA MCP + every agency specialist.**  
 “Almost” is a fail. Next KEY must match or beat this kit.
@@ -23,7 +24,8 @@ Owner lock: **this end-to-end Manual QA level is the Perfect-100 bar for LIQA MC
 | Book1 | ≥110 rows, image_coverage=100%, SHARE min-chars, `liqa_book1_validate` ok |
 | Execute | Eyes→Brain→Hands; honesty 20 / obvious-3 with proof PNGs |
 | Bugs | REAL_BUG only after honesty; **dedupe** existing open bugs first |
-| Close | learn_cycle + comment on Story + proofs under `reports/proof/<KEY>/` |
+| Attach | Cropped PNGs in Jira **Attachments** panel via `liqa_attach_bug_proofs` / auto `liqa_attach_end_of_run` (pack `outputs/<KEY>/jira-attach-pack-<BUG>/`) — description filenames alone fail |
+| Close | learn_cycle + Xray EOR + Attach EOR + comment on Story + proofs under `reports/proof/<KEY>/` |
 
 ---
 
@@ -65,5 +67,6 @@ artifacts/perfect-100-pf59486/
 
 ## Version bump
 
-MCP `PERSONA_VERSION` / `laws.VERSION` = `2026-09-16-liqa-perfect-100-v5`  
-Agency training = `2026-09-16-qa-trained-perfect-100-v2`
+MCP `PERSONA_VERSION` / `laws.VERSION` = `2026-09-22-liqa-perfect-100-v6`  
+Agency training = `2026-09-16-qa-trained-perfect-100-v2`  
+v6 adds **BUG PROOF ATTACH LOCK** — end-of-run Attachments RPA (`liqa_attach_end_of_run`).
