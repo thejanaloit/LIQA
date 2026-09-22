@@ -1138,13 +1138,17 @@ def liqa_attach_bug_proofs(
     file_paths: str = "",
     story_key: str = "",
     headed: bool = True,
-    skip_existing: bool = True,
+    skip_existing: bool = False,
 ) -> dict[str, Any]:
-    """Attach cropped proof PNGs to Jira bug(s) via headed UI RPA (Attachments panel).
+    """Upload cropped proof PNGs into a Jira Activity comment (visible images).
 
-    - issue_key + file_paths (comma-separated): attach those files to one bug
+    PRIMARY RPA: open comment → click toolbar **Add image, video, or file** →
+    choose PNGs → Save. Not description filename lists.
+
+    - issue_key + file_paths (comma-separated): upload those files on one bug
     - story_key alone / empty: discover outputs/<STORY>/jira-attach-pack-<BUG>/*.png
-    Auto-runs on phase 7 / learn_cycle. Idempotent: skips filenames already attached.
+    Auto-runs on phase 7 / learn_cycle. skip_existing defaults false so Activity
+    always gets a visible comment with images.
     """
     if jira_attach is None:
         return {"ok": False, "error": "jira_attach_proofs module unavailable"}

@@ -112,7 +112,7 @@ ISTQB_PHASES = [
             "Re-clarify honesty 3 cycles.",
             "liqa_learn_cycle + liqa_learn_speed: update skills and SPEED-PLAYBOOK.",
             "Auto: liqa_complete_phase(7) / liqa_learn_cycle call liqa_xray_end_of_run_upload (headed UI RPA for all packs in jira-created.json) via subprocess if asyncio.",
-            "Auto LAST: liqa_attach_end_of_run / liqa_attach_bug_proofs — headed UI RPA puts cropped PNGs into the Jira **Attachments** panel for every outputs/<STORY>/jira-attach-pack-<BUG_KEY>/. Filenames in the description alone are NOT proof.",
+            "Auto LAST: liqa_attach_end_of_run / liqa_attach_bug_proofs — headed UI RPA opens Activity comment → clicks **Add image, video, or file** → uploads cropped PNGs → Save. Filenames in the description alone are NOT proof.",
             "Evaluators must pass Book1 SHARE guards before share (Perfect-100 = PF-59486 bar).",
             "Dedupe bugs: Relates twins to oldest open; attach proof PNGs (Attachments panel must show thumbnails).",
             "Close only when Book1 + Jira bugs (if any) + honesty + Manual steps upload + Attachments RPA are complete.",
